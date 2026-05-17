@@ -171,12 +171,39 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
 
+        
+        /* ═══ Global Touch & Scroll Optimization ═══ */
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            touch-action: manipulation;
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Better touch targets for mobile */
+        @media (max-width: 768px) {
+            button, a, .nav-dot {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            .nav-dot {
+                min-height: 12px;
+                min-width: 12px;
+            }
+        }
+
         /* ═══════════════════════════════════════════
            HANDWRITING ANIMATION SYSTEM
            ═══════════════════════════════════════════ */
         .handwriting-container {
             position: relative;
             display: inline-block;
+            padding-right: 8px; /* Space for the moving cursor */
         }
 
         .handwriting-text {
@@ -187,19 +214,22 @@
             -webkit-background-clip: text;
             background-clip: text;
             opacity: 0;
-            animation: handwritingReveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            animation-delay: 0.8s;
+            animation: handwritingReveal 2.8s ease-out forwards;
+            animation-delay: 1.5s;
         }
 
-        .handwriting-text::after {
-            content: '';
+        .handwriting-cursor {
             position: absolute;
-            right: -4px;
             top: 10%;
             height: 80%;
             width: 3px;
             background: #D93C7A;
-            animation: cursorBlink 0.8s infinite, cursorFade 1s 2.8s forwards;
+            left: 0;
+            opacity: 0;
+            animation: 
+                cursorSweep 2.8s ease-out forwards,
+                cursorBlink 0.8s infinite;
+            animation-delay: 1.5s;
         }
 
         /* Pen-stroke underline that draws itself */
@@ -211,30 +241,26 @@
             background: linear-gradient(90deg, #D93C7A, #E7B6C7, transparent);
             transform-origin: left;
             transform: scaleX(0);
-            animation: drawUnderline 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            animation-delay: 2s;
+            animation: drawUnderline 1.2s ease-out forwards;
+            animation-delay: 4.3s;
             border-radius: 2px;
         }
 
         /* Letter-by-letter reveal via clip-path */
         @keyframes handwritingReveal {
-            0% {
-                opacity: 1;
-                clip-path: inset(0 100% 0 0);
-            }
-            100% {
-                opacity: 1;
-                clip-path: inset(0 0% 0 0);
-            }
+            0% { opacity: 1; clip-path: inset(0 100% 0 0); }
+            100% { opacity: 1; clip-path: inset(0 0% 0 0); }
+        }
+
+        @keyframes cursorSweep {
+            0% { left: 0; opacity: 1; }
+            99% { left: 100%; opacity: 1; }
+            100% { left: 100%; opacity: 0; }
         }
 
         @keyframes cursorBlink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
-        }
-
-        @keyframes cursorFade {
-            to { opacity: 0; width: 0; }
         }
 
         @keyframes drawUnderline {
@@ -245,8 +271,8 @@
         .hero-subheading {
             opacity: 0;
             transform: translateY(20px);
-            animation: subtleRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            animation-delay: 2.4s;
+            animation: subtleRise 1.2s ease-out forwards;
+            animation-delay: 4.8s;
         }
 
         @keyframes subtleRise {
@@ -259,10 +285,10 @@
         /* Responsive scaling for the handwriting */
         @media (max-width: 768px) {
             .handwriting-text {
-                font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+                font-size: clamp(1.1rem, 5vw, 1.75rem) !important;
             }
             .hero-subheading {
-                font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important;
+                font-size: clamp(0.65rem, 2.5vw, 0.85rem) !important;
                 max-width: 90% !important;
             }
         }
@@ -337,7 +363,7 @@
             100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-            animation: marquee 40s linear infinite;
+            animation: marquee 22s linear infinite;
         }
         .animate-marquee:hover {
             animation-play-state: paused;
@@ -557,24 +583,27 @@
   </style>
 <body class="bg-black text-white selection:bg-neon-rose selection:text-white">
     <!-- Vertical 3D Navigator -->
-    <nav class="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-6 backdrop-blur-2xl bg-white/[0.03] border border-white/10 py-6 px-3 md:px-4 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.8)] transform-style-3d scale-90 md:scale-100">
-        <a href="#hero" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Home</span>
+    <nav class="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 backdrop-blur-2xl bg-white/[0.03] border border-white/10 py-4 px-2 md:px-3 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.8)] transform-style-3d scale-90 md:scale-100">
+        <a href="#hero" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Home</span>
         </a>
-        <a href="#boutique-services" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Services</span>
+        <a href="#reviews" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Reviews</span>
         </a>
-        <a href="#our-work-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Gallery</span>
+        <a href="#boutique-services" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Services</span>
         </a>
-        <a href="#boutique" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Shop</span>
+        <a href="#our-work-gallery" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Gallery</span>
         </a>
-        <a href="#booking" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Book</span>
+        <a href="#boutique" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Shop</span>
         </a>
-        <a href="#sanctuary-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
-            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Sanctuary</span>
+        <a href="#booking" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Book</span>
+        </a>
+        <a href="#sanctuary-gallery" class="nav-dot group relative w-2 h-2 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[6px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-1.5 py-0.5 rounded-sm backdrop-blur-md border border-white/10 pointer-events-none">Sanctuary</span>
         </a>
     </nav>
     <!-- Preloader -->
@@ -617,15 +646,16 @@
                 </div>
                 
                 <!-- Hero Heading with Handwriting Animation -->
-                <div class="handwriting-container mt-[5vh]">
-                    <h1 class="handwriting-text font-hero-script text-5xl md:text-8xl lg:text-[7rem] leading-[1.15] tracking-wide whitespace-nowrap">
+                <div class="handwriting-container mt-40">
+                    <h1 class="handwriting-text font-hero-script text-3xl md:text-5xl lg:text-[3.5rem] leading-[1.15] tracking-wide whitespace-nowrap">
                         The DASHE Experience
                     </h1>
+                    <span class="handwriting-cursor"></span>
                     <span class="handwriting-underline"></span>
                 </div>
                 
                 <!-- Subheading -->
-                <p class="hero-subheading font-hero-display text-base md:text-xl lg:text-2xl text-gray-300/90 max-w-lg leading-relaxed italic" style="font-weight: 400;">
+                <p class="hero-subheading font-hero-display text-sm md:text-base lg:text-lg text-gray-300/90 max-w-lg leading-relaxed italic" style="font-weight: 400;">
                     Step into a world of cinematic beauty, elevated care, and timeless glamour.
                 </p>
             </div>
@@ -635,6 +665,342 @@
     </section>
 
     <main id="main-content" class="relative z-20 bg-background">
+    <!-- Reviews Section -->
+    <section id="reviews" class="relative w-full py-24 px-4 md:px-12 overflow-hidden bg-background">
+        <!-- Background Accents -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-neon-rose/5 blur-[150px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-luxury-pink/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto flex flex-col gap-12">
+            <div class="flex flex-col items-center gap-4 text-center reveal-on-scroll">
+                <div class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md shadow-lg transform hover:scale-105 transition-transform">
+                    <span class="text-white font-body-md font-bold text-lg">4.7</span>
+                    <div class="flex text-[#fbbc04] text-sm">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs ml-1 uppercase tracking-widest font-label-caps">Google Reviews</span>
+                </div>
+                <h2 class="font-display-lg text-4xl md:text-6xl text-white mt-4">What our Customers <span class="text-luxury-pink italic font-hero-display">think about us</span></h2>
+            </div>
+            <style>
+/* ═══ 4D Depth for Beauty Experts ═══ */
+                .expert-card {
+                    perspective: 800px;
+                    transform-style: preserve-3d;
+                    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+                }
+                .expert-card:hover {
+                    transform: translateY(-8px) rotateY(3deg) rotateX(2deg);
+                    box-shadow: 
+                        0 25px 60px -15px rgba(217, 60, 122, 0.35),
+                        0 0 40px -10px rgba(236, 72, 153, 0.2),
+                        inset 0 0 80px rgba(217, 60, 122, 0.05);
+                    border-color: rgba(217, 60, 122, 0.5);
+                }
+                .expert-card::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border-radius: 30px;
+                    background: linear-gradient(135deg, rgba(217,60,122,0) 0%, rgba(217,60,122,0.08) 50%, rgba(217,60,122,0) 100%);
+                    opacity: 0;
+                    transition: opacity 0.8s ease;
+                    pointer-events: none;
+                    z-index: 5;
+                }
+                .expert-card:hover::after {
+                    opacity: 1;
+                }
+                .expert-card img {
+                    transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), filter 0.8s ease;
+                }
+                .expert-card:hover img {
+                    transform: scale(1.12) translateZ(20px);
+                    filter: brightness(1.1) contrast(1.05);
+                }
+
+                /* ═══ Mobile Touch Optimization ═══ */
+                @media (max-width: 768px) {
+                    .mobile-scroll-container {
+                        -webkit-overflow-scrolling: touch;
+                        scroll-snap-type: x mandatory;
+                        scroll-behavior: smooth;
+                        overscroll-behavior-x: contain;
+                    }
+                    .mobile-scroll-item {
+                        scroll-snap-align: start;
+                    }
+                    /* Fix accordion on mobile */
+                    .group\/gallery {
+                        flex-direction: column !important;
+                        height: auto !important;
+                    }
+                    .group\/gallery > div {
+                        flex: none !important;
+                        height: 200px !important;
+                    }
+                    .group\/gallery > div:hover {
+                        height: 350px !important;
+                    }
+                }
+            </style>
+
+            <!-- Swiper -->
+            <style>
+                .reviews-swiper .swiper-wrapper { align-items: stretch; }
+                .reviews-swiper .swiper-slide { height: auto; display: flex; }
+                .review-card { display: flex; flex-direction: column; width: 100%; }
+                .review-card .review-text-wrap { flex: 1; display: flex; flex-direction: column; }
+            </style>
+            <div class="swiper reviews-swiper w-full py-6 perspective-1000">
+                <div class="swiper-wrapper">
+                    <!-- Review 1 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">I</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">iqbal alsabah</span>
+                                        <span class="text-gray-500 text-[10px]">9 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Words can’t express how much I love Dashe. From the moment you walk in, you’re welcomed by the warmest hosts who instantly make you feel at home. The space is sleek, spotless and effortlessly luxurious. I’ve been coming here for the past couple of months after my cousin’s recommendation and I genuinely believe it’s the best salon in Kuwait.<br><br>The attention to detail and care the specialists put into every service is unmatched. While I usually go for a classic mani pedi, I decided to treat myself to some nail art today and I’m so glad I did. Gulnara was incredible, so patient, precise and genuinely passionate about her work. She took her time to understand exactly what I wanted and made sure every detail was perfect. The final result turned out even better than the inspo picture. I couldn’t stop looking at my nails after. Thank you so much, Dashe ❤️</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                            <div class="text-[10px] text-gray-500 mt-1"><span class="text-gray-400">Services:</span> Nail painting, Nail designs, Gel manicures</div>
+                            <div class="flex gap-2 mt-1">
+                                <img src="../Images/Reviews/1.png" onclick="openLightbox(this.src, event)" class="w-12 h-12 object-cover rounded-lg cursor-pointer hover:opacity-80 transition hover:scale-105 border border-white/10 shadow-md">
+                                <img src="../Images/Reviews/1-1.png" onclick="openLightbox(this.src, event)" class="w-12 h-12 object-cover rounded-lg cursor-pointer hover:opacity-80 transition hover:scale-105 border border-white/10 shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">D</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Dalal Alhajeri</span>
+                                        <span class="text-gray-500 text-[10px]">a year ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Excellent atmosphere. Very friendly staff. Mani and Paedi with Rose and Sheine wete excellent. Cham was perfect for hair cut and blow dry. Very highly recommended</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                            <div class="text-[10px] text-gray-500 mt-1"><span class="text-gray-400">Services:</span> Manicure, Shampoo & conditioning, Blow dry, Pedicure</div>
+                            <div class="flex gap-2 mt-1">
+                                <img src="../Images/Reviews/2.png" onclick="openLightbox(this.src, event)" class="w-12 h-12 object-cover rounded-lg cursor-pointer hover:opacity-80 transition hover:scale-105 border border-white/10 shadow-md">
+                                <img src="../Images/Reviews/2-2.png" onclick="openLightbox(this.src, event)" class="w-12 h-12 object-cover rounded-lg cursor-pointer hover:opacity-80 transition hover:scale-105 border border-white/10 shadow-md">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">H</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Heba Shati</span>
+                                        <span class="text-gray-500 text-[10px]">7 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">tbh i had the best experience ever with cham her beach waves technique was 10/10 it took me 30 minutes to do the hair love how fast and professional her work ♥️ also looking forward to do hair color with her</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">A</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Ana Paula Brito</span>
+                                        <span class="text-gray-500 text-[10px]">9 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">I love going to the salon! I had highlights done with Rafaela, who perfectly understood what I wanted, she is extremely professional, and the result was even better than I imagined! I’ll definitely be coming back. I also had Brow Lamination …</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">Y</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Yasmeen Al-Abdulghafoor</span>
+                                        <span class="text-gray-500 text-[10px]">8 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">I had my highlights done yesterday with Rafaela and everything was perfect! She listened to what I wanted, the color turned out beautiful, and the whole experience was smooth and professional. The salon was clean and welcoming,I couldn’t be happier!</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">H</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">H</span>
+                                        <span class="text-gray-500 text-[10px]">4 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Absolutely loved my hair! i did a blow out with rollers with dashka, i definitely recommend🩷 …</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 7 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">L</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Latifa Al-Humaidi</span>
+                                        <span class="text-gray-500 text-[10px]">a year ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Absolutely Amazing Experience! I had the best experience at Dashe salon! From the moment I walked in, I was …</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 8 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">N</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Nour H</span>
+                                        <span class="text-gray-500 text-[10px]">8 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Favourite salon for nails i love the atmosphere the service it’s my new go to salon.</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 9 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">K</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">karima rowan</span>
+                                        <span class="text-gray-500 text-[10px]">4 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Love the energy there and they have experienced staff. Specially for curly hair 😍 …</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 10 -->
+                    <div class="swiper-slide" style="width:260px;">
+                        <div class="review-card bg-black/40 border border-white/10 rounded-2xl p-4 gap-2 transform-style-3d hover:border-neon-rose/40 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(217,60,122,0.3)] hover:-translate-y-1 group backdrop-blur-md">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-luxury-pink to-neon-rose flex items-center justify-center text-white font-bold text-sm uppercase shadow-lg">R</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-semibold text-xs">Ria Ali</span>
+                                        <span class="text-gray-500 text-[10px]">8 months ago</span>
+                                    </div>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 opacity-80 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex text-[#fbbc04] text-[10px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="relative review-text-wrap">
+                                <p class="text-gray-300 text-[11px] leading-relaxed line-clamp-4 transition-all duration-300">Amazing experience!!! Friendly staffs and the the hair professional recommended what color that suits best according my features and skin tone! Honestly the outcome i was inlove with it😍😍❤️ …</p>
+                                <button onclick="toggleReview(this)" class="text-neon-rose text-[10px] font-semibold mt-1 hover:text-white transition-colors">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
         
         <section id="boutique-services" class="relative w-full py-24 px-8 md:px-24 overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-black to-transparent pointer-events-none"></div>
@@ -1051,6 +1417,10 @@
 
         <!-- Redesigned Footer -->
         <footer class="relative bg-background pt-24 pb-20 px-6 md:px-12 overflow-hidden border-t border-white/5">
+            <!-- Footer Ambient Glows -->
+            <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-neon-rose/5 blur-[200px] rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-luxury-pink/5 blur-[180px] rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-0 w-[300px] h-[300px] bg-neon-rose/3 blur-[150px] rounded-full pointer-events-none"></div>
             <!-- Footer Heading -->
             <div class="flex flex-col items-center text-center gap-6 mb-24 px-6">
                 <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase reveal-on-scroll">The Artisans</p>
@@ -1063,62 +1433,62 @@
                     <!-- Experts Row 1 -->
                     <div class="flex gap-10 px-5 items-start">
                         <!-- Expert 1 -->
-                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[600px] expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 2 - Staggered -->
-                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[520px] mt-24 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 3 -->
-                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[580px] mt-12 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 4 - Staggered -->
-                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[620px] mt-0 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 5 -->
-                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[500px] mt-32 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 6 - Staggered -->
-                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[580px] mt-16 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 7 -->
-                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[540px] mt-28 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                         <!-- Expert 8 - Staggered -->
-                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[600px] mt-8 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                     </div>
                     <!-- Duplicate Row for Seamless Loop -->
                     <div class="flex gap-10 px-5 items-start">
-                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[600px] expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[520px] mt-24 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[580px] mt-12 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[620px] mt-0 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[500px] mt-32 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[580px] mt-16 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[540px] mt-28 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
-                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                        <div class="relative w-[320px] h-[600px] mt-8 expert-card group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
                             <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
                         </div>
                     </div>
@@ -1363,6 +1733,8 @@
             slidesPerView: 'auto',
             rewind: true,
             speed: 1000,
+            touchEventsTarget: 'container',
+            touchRatio: 1.5,
             coverflowEffect: { rotate: 15, stretch: 0, depth: 300, modifier: 1, slideShadows: true },
             pagination: { el: '.swiper-pagination', clickable: true },
             autoplay: { delay: 2000, disableOnInteraction: false },
@@ -1394,5 +1766,108 @@
                 window.open(`https://wa.me/96566307999?text=${msg}`, '_blank');
             });
         }
+
+        // 10. Reviews Swiper & Lightbox
+        const reviewsSwiper = new Swiper('.reviews-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            initialSlide: 2,
+            loop: true,
+            speed: 800,
+            touchEventsTarget: 'container',
+            touchRatio: 1.5,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            coverflowEffect: {
+                rotate: 8,
+                stretch: 0,
+                depth: 200,
+                modifier: 1,
+                slideShadows: false,
+            },
+            breakpoints: {
+                320: { slidesPerView: 1.2, spaceBetween: 16 },
+                768: { slidesPerView: 2.2, spaceBetween: 24 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            }
+        });
+
+        // Dynamic Read-More: toggle expand/collapse
+        function toggleReview(btn) {
+            const p = btn.previousElementSibling;
+            if (p.classList.contains('line-clamp-4')) {
+                p.classList.remove('line-clamp-4');
+                btn.innerText = 'Read less';
+            } else {
+                p.classList.add('line-clamp-4');
+                btn.innerText = 'Read more';
+            }
+        }
+
+        // Dynamic Read-More: hide button if text is NOT truncated
+        function initDynamicReadMore() {
+            document.querySelectorAll('.review-card .review-text-wrap').forEach(wrap => {
+                const p = wrap.querySelector('p');
+                const btn = wrap.querySelector('button');
+                if (!p || !btn) return;
+                // Temporarily remove clamp to measure full height
+                const wasClamped = p.classList.contains('line-clamp-4');
+                p.classList.remove('line-clamp-4');
+                const fullH = p.scrollHeight;
+                p.classList.add('line-clamp-4');
+                const clampedH = p.clientHeight;
+                if (fullH <= clampedH + 2) {
+                    // Text fits fully — hide button, remove clamp
+                    btn.style.display = 'none';
+                    p.classList.remove('line-clamp-4');
+                } else {
+                    // Text is truncated — show button
+                    btn.style.display = 'inline-block';
+                }
+            });
+        }
+        // Run after fonts load for accurate measurement
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => setTimeout(initDynamicReadMore, 100));
+        } else {
+            window.addEventListener('load', () => setTimeout(initDynamicReadMore, 300));
+        }
+
+        function openLightbox(src, event) {
+            event.stopPropagation();
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.classList.remove('hidden');
+            lb.style.display = 'flex';
+            setTimeout(() => {
+                lb.classList.remove('opacity-0');
+                img.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            lb.classList.add('opacity-0');
+            img.classList.add('scale-95');
+            setTimeout(() => {
+                lb.style.display = 'none';
+                lb.classList.add('hidden');
+            }, 300);
+        }
     </script>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[20000] bg-black/90 hidden items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl scale-95 transition-transform duration-300 shadow-[0_0_50px_rgba(217,60,122,0.3)]">
+        <button class="absolute top-6 right-6 text-white bg-white/10 rounded-full w-10 h-10 flex items-center justify-center hover:bg-neon-rose transition-colors duration-300">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
 </body></html>
