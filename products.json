@@ -1,0 +1,156 @@
+[
+  {
+    "title": "Anua Azelaic Acid 10+ Hyaluron Redness Soothing Serum",
+    "price": "8.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/10/anua-us-ampoule-serum-azelaic-acid-10-hyaluron-redness-soothing-serum-1161173135-600x600.webp",
+    "description": "Designed to calm sensitive, redness-prone skin while providing lightweight hydration. Addresses irritation often worsened by hot climates and air conditioning. Helps visibly reduce redness and uneven skin tone.",
+    "benefits": [
+      {"icon": "health_and_safety", "text": "Redness Relief"},
+      {"icon": "water_drop", "text": "Deep Hydration"},
+      {"icon": "palette", "text": "Evens Tone"}
+    ]
+  },
+  {
+    "title": "Abib Airy Sunstick Smoothing Bar",
+    "price": "9.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/08/06b_2048x_9e743a54-5ad1-4421-a567-5721c42bbd44-600x600.webp",
+    "description": "A lightweight, non-greasy sun protection stick that glides on smoothly with a matte finish. Ideal for on-the-go protection without a white cast.",
+    "benefits": [
+      {"icon": "sunny", "text": "SPF 50+ Protection"},
+      {"icon": "texture", "text": "Matte Finish"},
+      {"icon": "shutter_speed", "text": "Fast Application"}
+    ]
+  },
+  {
+    "title": "Anua Niacinamide 10+ TXA 4 Serum",
+    "price": "8.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2024/08/anua-us-ampoule-serum-30ml-niacinamide-10-txa-4-serum-1161173091-600x600.webp",
+    "description": "Targets uneven skin tone and persistent dark spots. Niacinamide regulates sebum and strengthens the barrier, while Tranexamic Acid reduces melanin synthesis.",
+    "benefits": [
+      {"icon": "auto_awesome", "text": "Dark Spot Correction"},
+      {"icon": "shield", "text": "Barrier Support"},
+      {"icon": "opacity", "text": "Brightening"}
+    ]
+  },
+  {
+    "title": "Anua Peach 70% Niacinamide Serum",
+    "price": "7.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/08/IMG_0080-600x660.jpeg",
+    "description": "Brightens and evens out skin tone while tackling dullness and enlarged pores. Contains 70% Niacinamide and Peach Extract for a radiant glow.",
+    "benefits": [
+      {"icon": "flare", "text": "Radiant Glow"},
+      {"icon": "grid_view", "text": "Pore Tightening"},
+      {"icon": "nutrition", "text": "Peach Extract"}
+    ]
+  },
+  {
+    "title": "Anua Rice 70 Glow Milky Toner",
+    "price": "10.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/08/Screenshot-2025-03-14-at-10.34.10-PM-600x725.png",
+    "description": "A gentle milky formula that replenishes moisture and reveals a fresh, radiant complexion using Rice Extract and Niacinamide.",
+    "benefits": [
+      {"icon": "eco", "text": "Natural Rice Extract"},
+      {"icon": "air", "text": "Silky Texture"},
+      {"icon": "face", "text": "Softening"}
+    ]
+  },
+  {
+    "title": "Authentic Beauty Concept Amplify Conditioner",
+    "price": "12.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/12/42367130_1-600x600.webp",
+    "description": "A lightweight, silicone-free formula that boosts volume and body for thicker, more manageable hair with a refreshing citrus scent.",
+    "benefits": [
+      {"icon": "expand", "text": "Volume Boost"},
+      {"icon": "clean_hands", "text": "Silicone Free"},
+      {"icon": "filter_drama", "text": "Lightweight"}
+    ]
+  },
+  {
+    "title": "Authentic Beauty Concept Deep Cleansing Shampoo",
+    "price": "12.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/12/42366898_1-600x600.webp",
+    "description": "Removes environmental impurities, product build-up, and greasiness without sulphates or parabens, leaving hair refreshed.",
+    "benefits": [
+      {"icon": "cleaning_services", "text": "Detoxifying"},
+      {"icon": "waves", "text": "Sulphate Free"},
+      {"icon": "refresh", "text": "Deeply Refreshed"}
+    ]
+  },
+  {
+    "title": "Aveda Botanical Repair Strengthening Masque",
+    "price": "25.250",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/11/av_sku_AX0E01_122900_355x600_0-1-600x1014.jpg",
+    "description": "Intensely repairs and strengthens hair instantly with 2 times the plant lipids and added butters for healthier, softer hair.",
+    "benefits": [
+      {"icon": "fitness_center", "text": "Intense Repair"},
+      {"icon": "herb", "text": "Plant Based"},
+      {"icon": "magic_button", "text": "Instant Results"}
+    ]
+  },
+  {
+    "title": "Axis-Y Dark Spot Correcting Glow Serum",
+    "price": "6.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/08/DarkSpotCorrectingGlowSerum_1-600x750.webp",
+    "description": "Visibly brightens uneven skin tone by targeting dark spots and hyperpigmentation with Niacinamide and Tranexamic Acid.",
+    "benefits": [
+      {"icon": "brightness_high", "text": "Hyperpigmentation"},
+      {"icon": "auto_fix_high", "text": "Glow Formula"},
+      {"icon": "check_circle", "text": "Clinically Proven"}
+    ]
+  },
+  {
+    "title": "Beauty of Joseon Radiance Cleansing Balm",
+    "price": "6.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/10/17_583e607a-40b5-4e09-bdf4-edc82cd1f4f9-600x600.webp",
+    "description": "A soft balm-to-oil cleanser that dissolves makeup and impurities while nourishing with Rice Bran Oil and Green Tea Extract.",
+    "benefits": [
+      {"icon": "ink_eraser", "text": "Makeup Melting"},
+      {"icon": "spa", "text": "Green Tea Infused"},
+      {"icon": "nest_eco_leaf", "text": "Gentle Cleanse"}
+    ]
+  },
+  {
+    "title": "Beauty of Joseon Relief Sun : Rice + Probiotics",
+    "price": "6.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/10/Untitled_design_-_2025-06-17T141004.013-600x750.webp",
+    "description": "A gentle, lightweight sunscreen with SPF50+ protection. Soothes and nourishes with Rice Extract and Probiotics without leaving a white cast.",
+    "benefits": [
+      {"icon": "verified_user", "text": "Broad Spectrum"},
+      {"icon": "microbiology", "text": "Probiotic Care"},
+      {"icon": "visibility_off", "text": "Zero White Cast"}
+    ]
+  },
+  {
+    "title": "Beauty of Joseon Revive Eye Serum",
+    "price": "6.500",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/10/37-1-600x600.webp",
+    "description": "Revitalizes the delicate skin around the eyes using Ginseng and Retinal to target fine lines and signs of fatigue.",
+    "benefits": [
+      {"icon": "visibility", "text": "Anti-Aging"},
+      {"icon": "psychology_alt", "text": "Ginseng Power"},
+      {"icon": "bedtime", "text": "Night Repair"}
+    ]
+  },
+  {
+    "title": "Color Wow Money Masque",
+    "price": "19.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2026/03/CRE-7545W-Remove-Award-Seals-MM_3-600x600.webp",
+    "description": "A deep-penetrating hair treatment that delivers massive hydration and strength using Blue Sea Kale and Mediterranean Sea Kelp.",
+    "benefits": [
+      {"icon": "diamond", "text": "Luxury Shine"},
+      {"icon": "pool", "text": "Sea Mineral Infused"},
+      {"icon": "bolt", "text": "Strength Boost"}
+    ]
+  },
+  {
+    "title": "Color Wow Dream Filter Serum",
+    "price": "13.000",
+    "image": "https://dashebeauty.com/wp-content/uploads/2025/08/Dream-Filter-200ml_Carousel-5_1000x-600x600.webp",
+    "description": "A serum that protects hair color from fading and environmental damage, ensuring a smooth, radiant, and picture-perfect finish.",
+    "benefits": [
+      {"icon": "filter", "text": "Color Protection"},
+      {"icon": "camera_enhance", "text": "Photo Ready"},
+      {"icon": "shield_moon", "text": "Pollution Shield"}
+    ]
+  }
+]

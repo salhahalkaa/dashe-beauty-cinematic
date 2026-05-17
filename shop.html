@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Boutique | DASHE Beauty - Premium Skincare & Wellness Collection</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Shop the DASHE Beauty Boutique. A curated collection of 600+ luxury skincare and wellness products from world-renowned brands like Anua, Abib, and Color Wow.">
+    <meta name="keywords" content="DASHE Shop, Skincare Boutique, Beauty Products Kuwait, Luxury Skincare, Anua Serum, Abib Sunstick">
+    <link rel="canonical" href="https://dashebeauty.com/shop.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dashebeauty.com/shop.html">
+    <meta property="og:title" content="DASHE Beauty Boutique | Luxury Skincare Collection">
+    <meta property="og:description" content="Discover our curated selection of high-performance skincare and beauty essentials. Premium quality, expertly selected.">
+    <meta property="og:image" content="https://dashebeauty.com/wp-content/uploads/2024/05/DASHE-LOGO-WHITE.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "DASHE Beauty Boutique",
+      "description": "Premium skincare and beauty collection curated by DASHE Beauty.",
+      "url": "https://dashebeauty.com/shop.html",
+      "provider": {
+        "@type": "BeautySalon",
+        "name": "DASHE Beauty"
+      }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dashe-dark': '#0a0a0a',
+                        'luxury-pink': '#fdf2f8',
+                        'neon-rose': '#ec4899',
+                        'accent-gold': '#d4af37'
+                    },
+                    fontFamily: {
+                        'display': ['"Playfair Display"', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                        'display-lg': ['"Playfair Display"', 'serif'],
+                        'label-caps': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.15);
+        }
+
+        .product-image-container {
+            transition: transform 0.7s ease;
+        }
+        
+        .product-card:hover .product-image-container {
+            transform: translateZ(30px);
+        }
+        
+        .product-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #ec4899;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* 4D Depth Effects */
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        
+        .group:hover .group-hover\:translate-x-2 {
+            transform: translateX(8px);
+        }
+
+        /* Horizontal Scroll Optimization */
+        .mobile-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2rem;
+            gap: 1.5rem;
+        }
+        .mobile-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .mobile-scroll-item {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+        }
+        .three-col-mobile .mobile-scroll-item {
+            flex: 0 0 31% !important;
+            scroll-snap-align: start;
+        }
+        /* Mobile Safe Area & Fluid Typography */
+        :root {
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        
+        .fluid-display {
+            font-size: clamp(2rem, 6vw, 4rem);
+        }
+
+        @media (pointer: coarse) {
+            .product-card:active {
+                transform: scale(0.98);
+                transition: transform 0.1s;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-scroll-container {
+                display: grid;
+                overflow-x: visible;
+                padding-bottom: 0;
+                gap: 2rem;
+            }
+            .mobile-scroll-item {
+                flex: none;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon-rose selection:text-white relative">
+
+    <!-- Navigation (Simplified for Shop) -->
+    <nav class="fixed w-full z-[100] glass-nav transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col z-50 group">
+                <span class="font-display text-2xl tracking-[0.2em] text-white group-hover:text-neon-rose transition-colors">DASHE</span>
+                <span class="font-sans text-[0.6rem] tracking-[0.4em] text-gray-400 group-hover:text-white transition-colors uppercase">Beauty Kuwait</span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="text-sm font-label-caps tracking-widest text-gray-400 hover:text-white transition-colors">BACK TO HOME</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-40 pb-20 px-6 md:px-24 border-b border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-neon-rose/5 to-transparent opacity-50"></div>
+        <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center gap-6">
+            <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase reveal-on-scroll">The Complete Collection</p>
+            <h1 class="font-display-lg text-6xl md:text-8xl text-white reveal-on-scroll" style="transition-delay: 0.1s;">Shop</h1>
+            <p class="text-gray-400 max-w-lg mx-auto text-sm md:text-base leading-relaxed reveal-on-scroll" style="transition-delay: 0.2s;">
+                Discover our full range of over 600 premium beauty products, curated for luxury and excellence.
+            </p>
+        </div>
+    </header>
+
+    <!-- 4D Depth Divider -->
+    <div class="relative w-full flex justify-center z-30 -mt-px">
+        <div class="h-px w-3/4 max-w-5xl relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+        </div>
+    </div>
+
+    <!-- Shop Grid -->
+    <section class="py-20 px-6 md:px-24 relative min-h-screen">
+        <div class="max-w-[1400px] mx-auto">
+            
+            <!-- Controls -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+                <div class="text-gray-400 font-label-caps text-xs tracking-widest" id="product-count">Loading products...</div>
+                
+                <div class="relative w-full md:w-auto">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">search</span>
+                    <input type="text" id="search-input" placeholder="Search products..." class="w-full md:w-64 bg-white/5 border border-white/10 rounded-full py-3 pl-10 pr-6 text-sm text-white focus:outline-none focus:border-neon-rose transition-colors placeholder:text-gray-600 font-sans">
+                </div>
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="w-full flex justify-center py-20">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="mobile-scroll-container three-col-mobile lg:grid-cols-3 gap-8 gap-y-16 opacity-0 transition-opacity duration-1000">
+                <!-- Products dynamically injected here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-24 flex justify-center items-center gap-4 hidden" id="pagination-container">
+                <button id="prev-page" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-neon-rose hover:text-neon-rose transition-colors disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <span id="page-info" class="font-label-caps text-xs tracking-widest text-gray-400">PAGE 1 OF 1</span>
+                <button id="next-page" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-neon-rose hover:text-neon-rose transition-colors disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start group">
+                <span class="font-display text-xl tracking-[0.2em] text-white">DASHE</span>
+                <span class="font-sans text-[0.5rem] tracking-[0.4em] text-gray-400 uppercase">Beauty Kuwait</span>
+            </div>
+            <p class="text-xs text-gray-600 font-sans">© 2026 DASHE Beauty. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Cart Button -->
+    <div id="floating-cart" class="fixed bottom-6 left-6 md:bottom-10 md:left-10 z-[200] group flex items-center cursor-pointer hidden" onclick="toggleCart()">
+        <div class="w-16 h-16 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white text-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:scale-110 active:scale-95 transition-all duration-300 relative">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <div id="cart-count" class="absolute -top-2 -right-2 bg-neon-rose text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full shadow-lg">0</div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar Modal -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-black/95 backdrop-blur-3xl z-[300] transform translate-x-full transition-transform duration-500 border-l border-white/10 flex flex-col shadow-2xl">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
+            <h2 class="font-display text-2xl text-white tracking-widest">YOUR CART</h2>
+            <button onclick="toggleCart()" class="text-white hover:text-neon-rose transition-colors">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+            <!-- Items inject here -->
+        </div>
+        <div class="p-6 border-t border-white/10 bg-white/5">
+            <div class="flex justify-between text-white font-sans text-sm mb-2"><span>Subtotal</span><span id="cart-subtotal">0.000 KWD</span></div>
+            <div class="flex justify-between text-white font-sans text-sm mb-6"><span>Shipping</span><span>1.000 KWD</span></div>
+            <div class="flex justify-between text-white font-display text-xl mb-6 border-t border-white/10 pt-4"><span class="text-neon-rose">Total</span><span id="cart-total" class="text-neon-rose">0.000 KWD</span></div>
+            <button onclick="openCheckoutModal()" id="checkout-btn" class="w-full bg-white text-black py-4 rounded-xl font-label-caps tracking-widest uppercase hover:bg-neon-rose hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[400] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-500">
+        <div class="bg-dashe-dark border border-white/10 rounded-3xl p-8 w-full max-w-lg relative shadow-2xl">
+            <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 text-white hover:text-neon-rose transition-colors">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h2 class="font-display text-3xl text-white mb-6 tracking-widest">CHECKOUT</h2>
+            <form id="checkout-form" class="flex flex-col gap-4">
+                <input type="text" id="co-name" placeholder="Full Name" required class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-neon-rose outline-none">
+                <input type="tel" id="co-phone" placeholder="Phone Number" required class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-neon-rose outline-none">
+                <textarea id="co-address" placeholder="Full Delivery Address" required rows="3" class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-neon-rose outline-none resize-none"></textarea>
+                <button type="submit" id="place-order-btn" class="mt-4 bg-neon-rose text-white py-4 rounded-xl font-label-caps tracking-widest uppercase hover:bg-white hover:text-black transition-colors disabled:opacity-50">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-[400] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-500 overflow-y-auto">
+        <div class="bg-dashe-dark border border-white/10 rounded-[40px] w-full max-w-6xl relative shadow-2xl flex flex-col md:flex-row overflow-hidden my-8">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-white hover:text-neon-rose transition-colors z-10 bg-black/50 p-2 rounded-full backdrop-blur-md">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            
+            <!-- Left: Image Section -->
+            <div class="aspect-square relative overflow-hidden bg-white/5 flex items-center justify-center p-4 w-full md:w-1/2">
+                <img id="pm-image" src="" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+            
+            <!-- Right: Content Section -->
+            <div class="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="h-px w-8 bg-neon-rose"></span>
+                        <p id="pm-brand" class="font-label-caps text-[10px] text-neon-rose tracking-[0.6em] uppercase">PREMIUM COLLECTION</p>
+                    </div>
+                    
+                    <h2 id="pm-title" class="font-display text-3xl md:text-5xl text-white mb-6 leading-tight tracking-tight"></h2>
+                    
+                    <div class="flex items-baseline gap-3 mb-8">
+                        <span id="pm-price" class="text-3xl font-sans text-white font-medium"></span>
+                        <span class="text-gray-500 text-sm font-sans tracking-widest">KWD</span>
+                    </div>
+
+                    <p id="pm-desc" class="text-gray-400 font-sans leading-relaxed mb-10 text-sm md:text-base border-l-2 border-white/5 pl-6 italic"></p>
+                    
+                    <!-- Creative Benefits Section -->
+                    <div class="mb-12">
+                        <h4 class="font-label-caps text-[10px] text-gray-500 tracking-[0.4em] uppercase mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-xs">auto_awesome</span> Key Benefits
+                        </h4>
+                        <div id="pm-benefits" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Benefits injected here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 mt-auto">
+                    <button id="pm-add-btn" class="flex-1 bg-white text-black py-5 px-10 rounded-2xl font-label-caps text-xs tracking-[0.3em] uppercase hover:bg-neon-rose hover:text-white transition-all transform hover:-translate-y-1 shadow-2xl flex items-center justify-center gap-3 group">
+                        <span class="material-symbols-outlined text-[20px] group-hover:animate-pulse">shopping_cart</span>
+                        Add to Cart
+                    </button>
+                    <button onclick="window.open('https://wa.me/96566307999', '_blank')" class="bg-white/5 border border-white/10 text-white py-5 px-8 rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center">
+                        <span class="material-symbols-outlined">chat</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Intersection Observer for Reveal animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        function observeElements() {
+            document.querySelectorAll('.reveal-on-scroll:not(.is-revealed)').forEach((el) => observer.observe(el));
+        }
+
+        observeElements();
+
+        // Shop Logic
+        let allProducts = [];
+        let filteredProducts = [];
+        const itemsPerPage = 24;
+        let currentPage = 1;
+
+        const grid = document.getElementById('product-grid');
+        const loader = document.getElementById('loader');
+        const searchInput = document.getElementById('search-input');
+        const countDisplay = document.getElementById('product-count');
+        const paginationContainer = document.getElementById('pagination-container');
+        const prevBtn = document.getElementById('prev-page');
+        const nextBtn = document.getElementById('next-page');
+        const pageInfo = document.getElementById('page-info');
+
+        async function fetchProducts() {
+            try {
+                // Fetch the JSON generated by the scraper
+                const res = await fetch('products.json');
+                allProducts = await res.json();
+                filteredProducts = [...allProducts];
+                
+                // Hide loader, show grid
+                loader.style.display = 'none';
+                grid.classList.remove('opacity-0');
+                
+                renderPage(1);
+            } catch (err) {
+                console.error("Failed to load products:", err);
+                loader.innerHTML = '<p class="text-red-500">Failed to load products.</p>';
+            }
+        }
+
+        function renderPage(page) {
+            currentPage = page;
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageItems = filteredProducts.slice(startIndex, endIndex);
+            
+            countDisplay.innerText = `SHOWING ${filteredProducts.length} PRODUCTS`;
+            
+            grid.innerHTML = '';
+            
+            if (pageItems.length === 0) {
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-gray-500 font-sans">No products found matching your search.</div>';
+                paginationContainer.classList.add('hidden');
+                return;
+            }
+
+            pageItems.forEach((product, index) => {
+                // Use a default placeholder if image is missing
+                const imgUrl = product.image || 'https://via.placeholder.com/600x800/111/fff?text=No+Image';
+                const delay = (index % 4) * 0.1;
+
+                const card = document.createElement('div');
+                card.className = 'product-card mobile-scroll-item group relative cursor-pointer reveal-on-scroll';
+                card.style.transitionDelay = `${delay}s`;
+                
+                card.innerHTML = `
+                    <div class="product-image-container aspect-[3/4] rounded-[30px] overflow-hidden bg-white/5 border border-white/5 mb-6 flex items-center justify-center transition-all duration-700 transform-style-3d relative">
+                        <img src="${imgUrl}" class="w-full h-full object-cover object-center transition-all duration-700 drop-shadow-2xl" alt="${product.title}" loading="lazy">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center pointer-events-none">
+                            <span class="text-white font-label-caps tracking-widest text-xs border border-white/30 px-6 py-2 rounded-full backdrop-blur-md">VIEW DETAILS</span>
+                        </div>
+                    </div>
+                    <div class="px-2 transition-transform duration-500 group-hover:translate-x-2 relative z-10 flex flex-col items-start w-full h-full justify-between">
+                        <h3 class="font-display-lg text-lg text-white mb-2 line-clamp-2 leading-tight pr-2 w-full hover:text-neon-rose transition-colors">${product.title}</h3>
+                        <div class="flex justify-between items-center w-full mt-4">
+                            <p class="text-neon-rose font-label-caps text-xs tracking-widest">${product.price} KWD</p>
+                            <button class="add-to-cart-btn w-10 h-10 rounded-full bg-white/10 hover:bg-neon-rose flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 border border-white/10 hover:border-transparent shadow-lg group/btn shrink-0 ml-2">
+                                <span class="material-symbols-outlined text-[18px] text-white group-hover/btn:animate-bounce">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                const imgContainer = card.querySelector('.product-image-container');
+                const titleEl = card.querySelector('h3');
+                const addBtn = card.querySelector('.add-to-cart-btn');
+
+                imgContainer.addEventListener('click', () => openProductModal(product));
+                titleEl.addEventListener('click', () => openProductModal(product));
+                
+                addBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    addToCart(product);
+                });
+
+                grid.appendChild(card);
+            });
+
+            // Update Pagination
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            if (totalPages > 1) {
+                paginationContainer.classList.remove('hidden');
+                pageInfo.innerText = `PAGE ${currentPage} OF ${totalPages}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+            } else {
+                paginationContainer.classList.add('hidden');
+            }
+
+            // Re-trigger reveal observer for new elements
+            setTimeout(observeElements, 50);
+            
+            // Scroll to top of grid
+            if (currentPage !== 1) {
+                window.scrollTo({
+                    top: document.querySelector('header').offsetHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            filteredProducts = allProducts.filter(p => p.title.toLowerCase().includes(term));
+            renderPage(1);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) renderPage(currentPage - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            if (currentPage < totalPages) renderPage(currentPage + 1);
+        });
+
+        // Cart Logic
+        let cart = [];
+        const shippingFee = 1.000;
+
+        function addToCart(product) {
+            const existing = cart.find(item => item.title === product.title);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+            
+            const sidebar = document.getElementById('cart-sidebar');
+            if (sidebar.classList.contains('translate-x-full')) {
+                toggleCart();
+            }
+        }
+
+        function removeFromCart(title) {
+            cart = cart.filter(item => item.title !== title);
+            updateCartUI();
+        }
+
+        function updateQuantity(title, delta) {
+            const item = cart.find(i => i.title === title);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) removeFromCart(title);
+                else updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const floatingCart = document.getElementById('floating-cart');
+            const itemsContainer = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.innerText = totalItems;
+
+            if (totalItems > 0) {
+                floatingCart.classList.remove('hidden');
+            } else {
+                floatingCart.classList.add('hidden');
+            }
+
+            itemsContainer.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemPrice = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+                subtotal += itemPrice * item.quantity;
+                
+                const imgUrl = item.image || 'https://via.placeholder.com/150';
+                itemsContainer.innerHTML += `
+                    <div class="flex gap-4 items-center bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <img src="${imgUrl}" class="w-16 h-20 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="text-sm font-display text-white line-clamp-1">${item.title}</h4>
+                            <p class="text-xs text-neon-rose font-sans mt-1">${item.price} KWD</p>
+                            <div class="flex items-center gap-3 mt-3">
+                                <button onclick="updateQuantity('${item.title.replace(/'/g, "\\'")}', -1)" class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/30 transition-colors"><span class="material-symbols-outlined text-[14px]">remove</span></button>
+                                <span class="text-xs font-sans">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.title.replace(/'/g, "\\'")}', 1)" class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/30 transition-colors"><span class="material-symbols-outlined text-[14px]">add</span></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            subtotalEl.innerText = subtotal.toFixed(3) + ' KWD';
+            if (cart.length > 0) {
+                totalEl.innerText = (subtotal + shippingFee).toFixed(3) + ' KWD';
+                checkoutBtn.disabled = false;
+            } else {
+                totalEl.innerText = '0.000 KWD';
+                checkoutBtn.disabled = true;
+            }
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+            } else {
+                sidebar.classList.add('translate-x-full');
+            }
+        }
+
+        function openCheckoutModal() {
+            toggleCart();
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 500);
+        }
+
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('co-name').value;
+            const phone = document.getElementById('co-phone').value;
+            const address = document.getElementById('co-address').value;
+            
+            let subtotal = 0;
+            let itemsText = '';
+            cart.forEach(item => {
+                const itemPrice = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+                subtotal += itemPrice * item.quantity;
+                itemsText += `▪ ${item.quantity}x ${item.title} (${item.price} KWD)\n`;
+            });
+            
+            const total = subtotal + shippingFee;
+
+            const message = encodeURIComponent(
+                `✨ *DASHE BEAUTY ORDER* ✨\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n\n` +
+                `👤 *NAME:* ${name}\n` +
+                `📞 *PHONE:* ${phone}\n` +
+                `📍 *ADDRESS:* ${address}\n\n` +
+                `🛍️ *ITEMS:*\n${itemsText}\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `💵 *SUBTOTAL:* ${subtotal.toFixed(3)} KWD\n` +
+                `🚚 *SHIPPING:* ${shippingFee.toFixed(3)} KWD\n` +
+                `💰 *TOTAL:* ${total.toFixed(3)} KWD\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `_Sent via DASHE Boutique_`
+            );
+
+            window.open(`https://wa.me/96566307999?text=${message}`, '_blank');
+            closeCheckoutModal();
+            cart = [];
+            updateCartUI();
+        });
+
+        // Product Modal Logic
+        let currentModalProduct = null;
+        function openProductModal(product) {
+            currentModalProduct = product;
+            const modal = document.getElementById('product-modal');
+            const img = document.getElementById('pm-image');
+            const title = document.getElementById('pm-title');
+            const price = document.getElementById('pm-price');
+            const desc = document.getElementById('pm-desc');
+            const benefitsContainer = document.getElementById('pm-benefits');
+            
+            img.src = product.image || 'https://via.placeholder.com/600x800/111/fff?text=No+Image';
+            title.innerText = product.title;
+            price.innerText = product.price;
+            desc.innerText = product.description || "Experience the pinnacle of beauty with this carefully selected product from the DASHE collection, designed for those who demand excellence in their daily ritual.";
+
+            // Render Creative Benefits
+            benefitsContainer.innerHTML = '';
+            const benefits = product.benefits || [
+                {icon: 'verified', text: 'Premium Quality'},
+                {icon: 'auto_fix_high', text: 'Proven Results'},
+                {icon: 'eco', text: 'Skin Friendly'}
+            ];
+
+            benefits.forEach(benefit => {
+                benefitsContainer.innerHTML += `
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/5 p-3 rounded-xl transition-all hover:bg-white/10 group/benefit">
+                        <div class="w-8 h-8 rounded-lg bg-neon-rose/10 flex items-center justify-center text-neon-rose group-hover/benefit:bg-neon-rose group-hover/benefit:text-white transition-all">
+                            <span class="material-symbols-outlined text-[18px]">${benefit.icon}</span>
+                        </div>
+                        <span class="text-xs text-gray-300 font-sans tracking-wide">${benefit.text}</span>
+                    </div>
+                `;
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                currentModalProduct = null;
+                document.body.style.overflow = ''; // Restore scroll
+            }, 500);
+        }
+
+        document.getElementById('pm-add-btn').addEventListener('click', () => {
+            if (currentModalProduct) {
+                addToCart(currentModalProduct);
+                closeProductModal();
+            }
+        });
+
+        // Init
+        fetchProducts();
+
+    </script>
+</body>
+</html>

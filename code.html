@@ -8,8 +8,10 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -113,6 +115,15 @@
             font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         
+        /* 4D Depth Effects */
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        
+        .group:hover .group-hover\:translate-z-10 {
+            transform: translateZ(30px) scale(1.1);
+        }
+
         /* Custom Cursor */
         #cursor-dot {
             width: 8px;
@@ -215,6 +226,63 @@
             0%, 100% { opacity: 0.3; transform: scale(0.95); }
             50% { opacity: 1; transform: scale(1); }
         }
+
+        /* Swiper 3D Gallery */
+        .gallery-container {
+            perspective: 2000px;
+        }
+        .swiper-3d-gallery {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 120px;
+        }
+        .swiper-slide {
+            width: 320px;
+            height: 570px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #1b1016;
+            transform-style: preserve-3d;
+            transition: box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+        .swiper-slide-active {
+            border-color: rgba(217, 60, 122, 0.3);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(217, 60, 122, 0.1);
+        }
+        .slide-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+        .slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(27, 16, 22, 0.9) 0%, transparent 60%);
+            transform: translateZ(20px);
+        }
+        .slide-content {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            transform: translateZ(60px);
+            pointer-events: none;
+        }
+        @media (max-width: 640px) {
+            .swiper-slide {
+                width: 280px;
+                height: 500px;
+            }
+        }
     </style>
 <style>
     body {
@@ -224,6 +292,27 @@
     button, a { cursor: none; }
   </style>
 <body class="bg-black text-white selection:bg-neon-rose selection:text-white">
+    <!-- Vertical 3D Navigator -->
+    <nav class="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden xl:flex flex-col gap-6 backdrop-blur-2xl bg-white/[0.03] border border-white/10 py-6 px-4 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.8)] transform-style-3d">
+        <a href="#hero" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Home</span>
+        </a>
+        <a href="#boutique-services" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Services</span>
+        </a>
+        <a href="#our-work-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Gallery</span>
+        </a>
+        <a href="#boutique" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Shop</span>
+        </a>
+        <a href="#booking" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Book</span>
+        </a>
+        <a href="#sanctuary-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Sanctuary</span>
+        </a>
+    </nav>
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader-content">
@@ -284,7 +373,7 @@
     <main id="main-content" class="relative z-20 bg-background">
         
         <!-- Service Boutique Section -->
-        <section id="boutique-services" class="relative w-full py-40 px-8 md:px-24 overflow-hidden">
+        <section id="boutique-services" class="relative w-full py-24 px-8 md:px-24 overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-black to-transparent pointer-events-none"></div>
             <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-24">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
@@ -300,24 +389,24 @@
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">01</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Hair</h3>
-                        <button onclick="toggleServiceMenu('hair-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('hair-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="hair-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Hair Cutting')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Cutting')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">content_cut</span> Hair Cutting
                             </button>
-                            <button onclick="selectService('Hair Styling')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Styling')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">styler</span> Hair Styling
                             </button>
-                            <button onclick="selectService('Hair Coloring')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Coloring')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">palette</span> Hair Coloring
                             </button>
-                            <button onclick="selectService('Hair Treatments')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Treatments')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">vaccines</span> Hair Treatments
                             </button>
-                            <button onclick="selectService('Curly Hair Care')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Curly Hair Care')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">waves</span> Curly Hair Care
                             </button>
                         </div>
@@ -330,18 +419,18 @@
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">02</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Nails</h3>
-                        <button onclick="toggleServiceMenu('nails-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('nails-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="nails-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Basic Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Basic Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">brush</span> Basic Nails
                             </button>
-                            <button onclick="selectService('Advanced Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Advanced Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">format_paint</span> Advanced Nails
                             </button>
-                            <button onclick="selectService('Premium Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Premium Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">diamond</span> Premium Nails
                             </button>
                         </div>
@@ -354,12 +443,12 @@
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">03</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Eyes</h3>
-                        <button onclick="toggleServiceMenu('eyes-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('eyes-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="eyes-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Brows and Lashes')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Brows and Lashes')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">visibility</span> Brows & Lashes
                             </button>
                         </div>
@@ -372,24 +461,24 @@
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">04</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Makeup</h3>
-                        <button onclick="toggleServiceMenu('makeup-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('makeup-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="makeup-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Bridal Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Bridal Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">favorite</span> Bridal Makeup
                             </button>
-                            <button onclick="selectService('Full Glam Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Full Glam Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">auto_fix_high</span> Full Glam
                             </button>
-                            <button onclick="selectService('Arabic Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Arabic Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">temple_hindu</span> Arabic Makeup
                             </button>
-                            <button onclick="selectService('Event Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Event Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">celebration</span> Event Makeup
                             </button>
-                            <button onclick="selectService('Glass Skin Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Glass Skin Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">flare</span> Glass Skin
                             </button>
                         </div>
@@ -402,24 +491,24 @@
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">05</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">SPA</h3>
-                        <button onclick="toggleServiceMenu('spa-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('spa-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="spa-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Moroccan Bath')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Moroccan Bath')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">bathtub</span> Moroccan Bath
                             </button>
-                            <button onclick="selectService('Relaxation Massage')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Relaxation Massage')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">spa</span> Relaxation Massage
                             </button>
-                            <button onclick="selectService('Hydrafacial')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hydrafacial')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">water_drop</span> Hydrafacial
                             </button>
-                            <button onclick="selectService('Hammam Spa')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hammam Spa')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">hot_tub</span> Hammam Spa
                             </button>
-                            <button onclick="selectService('Luxury Spa Experience')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Luxury Spa Experience')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">workspace_premium</span> Luxury Experience
                             </button>
                         </div>
@@ -428,89 +517,80 @@
             </div>
         </section>
 
-        <!-- Artisans Marquee Section -->
-        <section id="artisans" class="relative w-full py-40 overflow-hidden bg-black/60">
-            <div class="max-w-7xl mx-auto px-12 md:px-24 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-12 reveal-on-scroll">
-                <div class="flex flex-col gap-6">
-                    <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">The Collective</p>
-                    <h2 class="font-display-lg text-6xl md:text-8xl text-white">Beauty Experts</h2>
-                </div>
-                <p class="text-gray-500 font-body-md max-w-sm mb-4">
-                    Our expert team delivers top-tier hair and makeup services with unmatched skill and creativity.
-                </p>
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
+        <!-- Our Work Gallery -->
+        <section id="our-work-gallery" class="relative w-full py-24 overflow-hidden bg-background">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="gallery_bg.jpeg" alt="Gallery Background" class="w-full h-full object-cover opacity-20 mix-blend-luminosity">
+                <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
             </div>
 
-            <div class="relative w-full overflow-hidden">
-                <div class="flex animate-marquee whitespace-nowrap">
-                    <!-- Experts Row 1 -->
-                    <div class="flex gap-4 px-2">
-                        <!-- Expert 1 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+            <div class="relative z-10 max-w-7xl mx-auto px-12 md:px-24 mb-16 reveal-on-scroll">
+                <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase mb-4">Aesthetic Moments</p>
+                <h2 class="font-display-lg text-6xl md:text-8xl text-white">Our Work</h2>
+            </div>
+
+            <div class="gallery-container relative z-10 reveal-on-scroll">
+                <div class="swiper swiper-3d-gallery">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_1.mp4')">
+                                <video src="work_vid_1.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Signature Look</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Artistry</p>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Expert 2 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_2.mp4')">
+                                <video src="work_vid_2.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Bridal Glow</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Details</p>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Expert 3 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 4 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 5 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 6 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 7 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 8 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                    </div>
-                    <!-- Duplicate Row for Seamless Loop -->
-                    <div class="flex gap-4 px-2">
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_3.mp4')">
+                                <video src="work_vid_3.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Editorial Glam</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Vision</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Navigation -->
+                    <div class="swiper-pagination !bottom-0"></div>
                 </div>
             </div>
         </section>
 
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
 
         <!-- Best Sellers Section -->
-        <section id="boutique" class="relative w-full py-40 px-12 md:px-24 bg-black/40">
+        <section id="boutique" class="relative w-full py-24 px-6 md:px-24 bg-black/40">
             <div class="max-w-7xl mx-auto flex flex-col gap-24">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">The Boutique</p>
@@ -519,39 +599,48 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Product 1 -->
-                    <div class="group relative reveal-on-scroll">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                    <div class="group relative reveal-on-scroll" style="perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/08/06b_2048x_9e743a54-5ad1-4421-a567-5721c42bbd44.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" alt="Abib Airy Sunstick Smoothing Bar">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">Got2b Glued 2in1 Gel</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">7.000 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Abib Airy Sunstick Smoothing Bar</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">9.500 KWD</p>
                     </div>
                     <!-- Product 2 -->
-                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.1s;">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.1s; perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/10/anua-us-ampoule-serum-azelaic-acid-10-hyaluron-redness-soothing-serum-1161173135.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" alt="Anua Azelaic Acid 10+ Hyaluron Redness Soothing Serum">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">SO NATURAL Setting Fixer</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">6.000 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Anua Azelaic Acid 10+ Hyaluron Redness Soothing</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">8.500 KWD</p>
                     </div>
                     <!-- Product 3 -->
-                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.2s; perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/10/anua-global-ampoule-serum-pdrn-hyaluronic-acid-capsule-100-serum-1161173231.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" alt="Anua PDRN Hyaluronic Acid Capsule 100+">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">Color Wow Volumizer</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">6.500 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Anua PDRN Hyaluronic Acid Capsule 100+</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">9.000 KWD</p>
                     </div>
-                    <!-- View All -->
-                    <div class="flex items-center justify-center border border-white/5 rounded-[40px] hover:border-neon-rose transition-colors cursor-pointer reveal-on-scroll" style="transition-delay: 0.3s;">
-                        <span class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-gray-500 hover:text-white">Show All</span>
-                    </div>
+                    <!-- View All / Shop Full Store -->
+                    <a href="shop.html" class="flex flex-col items-center justify-center border border-white/5 rounded-[40px] hover:border-neon-rose hover:bg-white/5 transition-all duration-700 cursor-pointer reveal-on-scroll group transform-style-3d hover:translate-y-[-10px] hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)] min-h-[350px]" style="transition-delay: 0.3s; perspective: 1000px;">
+                        <span class="material-symbols-outlined text-4xl text-gray-500 group-hover:text-neon-rose mb-4 transition-all duration-500 group-hover:scale-125">storefront</span>
+                        <span class="font-label-caps text-[10px] tracking-[0.5em] text-center uppercase text-gray-500 group-hover:text-white transition-colors">Shop All<br>600+ Products</span>
+                    </a>
                 </div>
             </div>
         </section>
 
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
         <!-- Appointment Booking Section -->
-        <section id="booking" class="relative w-full py-40 px-12 md:px-24 bg-background">
+        <section id="booking" class="relative w-full py-24 px-12 md:px-24 bg-background">
             <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-32 items-start">
                 <div class="flex flex-col gap-10 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">Bespoke Scheduling</p>
@@ -638,68 +727,226 @@
             </div>
         </section>
 
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
         <!-- Sanctuary Gallery Section -->
-        <section class="relative w-full py-40 px-12 md:px-24 bg-background overflow-hidden">
+        <section id="sanctuary-gallery" class="relative w-full py-24 px-12 md:px-24 bg-background overflow-hidden">
             <div class="max-w-7xl mx-auto flex flex-col gap-20">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase text-center">Visual Poetry</p>
                     <h2 class="font-display-lg text-6xl md:text-8xl text-white text-center">The Sanctuary</h2>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px]">
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl" style="transition-delay: 0.1s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+                <!-- 4D Cinematic Expanding Accordion -->
+                <div class="flex flex-col md:flex-row w-full h-[600px] gap-4 overflow-hidden group/gallery reveal-on-scroll" style="perspective: 2000px;">
+                    
+                    <!-- Panel 1 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Atmosphere</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">The VIP Lounge</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl mt-12" style="transition-delay: 0.2s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 2 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Detailing</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">Precision Artistry</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl" style="transition-delay: 0.3s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 3 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Relaxation</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">Private Spa Suites</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl mt-12" style="transition-delay: 0.4s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 4 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Experience</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">The Dashe Glow</h3>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="w-full py-40 px-12 md:px-24 border-t border-white/5 bg-black">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
-                <div class="flex flex-col gap-10">
-                    <img src="assets/main_logo.png" alt="DASHE" class="w-48 opacity-50 hover:opacity-100 transition-opacity">
-                    <p class="text-gray-600 max-w-xs font-body-md">
-                        Elite beauty meets premium care in the heart of Kuwait City. Experience the cinematic standard.
-                    </p>
-                </div>
-                
-                <div class="flex flex-col gap-8">
-                    <h4 class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-white">Contact</h4>
-                    <div class="flex flex-col gap-4 text-gray-500 font-body-md text-sm">
-                        <p>+965 66307999</p>
-                        <p>contact@ddbeautyvision.com</p>
-                        <p class="leading-relaxed">Yarmouk, Block 4, Street 3, Al Saqran Mall</p>
-                    </div>
-                </div>
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
 
-                <div class="flex flex-col gap-8">
-                    <h4 class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-white">Hours</h4>
-                    <div class="flex flex-col gap-4 text-gray-500 font-body-md text-sm">
-                        <p>Sunday - Saturday</p>
-                        <p>9:00AM - 9:00PM</p>
+        <!-- Redesigned Footer -->
+        <footer class="relative bg-background pt-24 pb-20 px-6 md:px-12 overflow-hidden border-t border-white/5">
+            <!-- Footer Heading -->
+            <div class="flex flex-col items-center text-center gap-6 mb-24 px-6">
+                <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase reveal-on-scroll">The Artisans</p>
+                <h2 class="font-display-lg text-6xl md:text-9xl text-white reveal-on-scroll">Our Beauty Experts</h2>
+                <div class="w-24 h-px bg-neon-rose/30 mt-4"></div>
+            </div>
+            <!-- Vertical Tiles / Experts Marquee -->
+            <div class="relative w-full overflow-hidden mb-40">
+                <div class="flex animate-marquee whitespace-nowrap">
+                    <!-- Experts Row 1 -->
+                    <div class="flex gap-10 px-5 items-start">
+                        <!-- Expert 1 -->
+                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 2 - Staggered -->
+                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 3 -->
+                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 4 - Staggered -->
+                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 5 -->
+                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 6 - Staggered -->
+                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 7 -->
+                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 8 - Staggered -->
+                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
                     </div>
-                    <nav class="flex gap-6 mt-4">
-                        <a href="https://instagram.com/dashebeautykw" target="_blank" class="text-neon-rose hover:text-white transition-colors uppercase text-[10px] font-label-caps tracking-widest">@dashebeautykw</a>
-                    </nav>
+                    <!-- Duplicate Row for Seamless Loop -->
+                    <div class="flex gap-10 px-5 items-start">
+                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="max-w-7xl mx-auto mt-32 pt-12 border-t border-white/5 text-center">
-                <p class="text-gray-700 text-[10px] tracking-[0.4em] uppercase">© 2024 DASHE Beauty | Luxury Redefined</p>
+
+            <!-- Quote / Text -->
+            <div class="max-w-2xl mx-auto md:mx-0 md:ml-12 mb-32 reveal-on-scroll">
+                <p class="text-white/60 font-body-md text-xl md:text-2xl leading-relaxed">
+                    Good beauty whispers. Great beauty makes people stop scrolling. We create iconic looks and digital-era aesthetics that capture attention and refuse to be forgotten. Let's bring your vision to life.
+                </p>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 pt-12 border-t border-white/5">
+                <!-- Social Icons -->
+                <div class="flex gap-8 items-center order-2 md:order-1">
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://instagram.com/dashebeautykw" target="_blank" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 order-1 md:order-2">
+                    <img src="assets/main_logo.png" alt="DASHE" class="h-16 w-auto opacity-90">
+                </div>
+
+                <!-- Get in Touch -->
+                <div class="order-3">
+                    <a href="#booking" class="bg-white text-black px-10 py-4 rounded-xl font-label-caps text-xs tracking-[0.3em] hover:bg-neon-rose hover:text-white transition-all uppercase">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center mt-16">
+                <p class="text-white/20 text-[10px] tracking-[0.4em] uppercase">© 2025 DASHE BEAUTY | ALL RIGHTS RESERVED</p>
             </div>
         </footer>
     </main>
 
     <script>
+        // Vertical Navigator Logic
+        const navSections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -80% 0px', // Trigger slightly higher up
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navDots.forEach(dot => {
+                        // Reset all dots
+                        dot.classList.remove('bg-neon-rose', 'scale-[1.8]', 'shadow-[0_0_15px_rgba(236,72,153,0.8)]');
+                        dot.classList.add('bg-white/20');
+                        
+                        // Highlight active dot
+                        if (dot.getAttribute('href') === `#${id}`) {
+                            dot.classList.remove('bg-white/20');
+                            dot.classList.add('bg-neon-rose', 'scale-[1.8]', 'shadow-[0_0_15px_rgba(236,72,153,0.8)]');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        navSections.forEach(sec => {
+            if(sec.getAttribute('id')) {
+                sectionObserver.observe(sec);
+            }
+        });
+
         // Magnetic Button Logic
         const magneticBtns = document.querySelectorAll('.magnetic-btn');
         magneticBtns.forEach(btn => {
@@ -873,14 +1120,69 @@
         .service-card {
             transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .service-card:hover {
+                .service-card:hover {
             transform: translateY(-20px);
             background-color: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.15);
             box-shadow: 0 40px 100px rgba(217, 60, 122, 0.15);
         }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
     </style>
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[200] group flex items-center">
+        <!-- Pop-up Text Bubble -->
+        <div id="whatsapp-popup" class="opacity-0 translate-x-10 transition-all duration-700 bg-white/10 backdrop-blur-xl border border-white/20 text-white px-6 py-3 rounded-2xl text-sm font-medium shadow-2xl mr-4 pointer-events-none whitespace-nowrap group-hover:opacity-100 group-hover:translate-x-0">
+            Need help!
+            <div class="absolute right-[-8px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-l-[10px] border-l-white/10 border-b-[8px] border-b-transparent"></div>
+        </div>
+        
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/96566307999" target="_blank" class="w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white text-3xl shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all duration-300 relative">
+            <i class="fab fa-whatsapp"></i>
+            <div class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
+        </a>
+    </div>
+
+    <!-- Fullscreen Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-[30000] hidden bg-black/95 backdrop-blur-xl flex-col items-center justify-center opacity-0 transition-opacity duration-500">
+        <button onclick="closeVideoModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-neon-rose transition-colors z-10">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <div class="relative w-full h-full max-w-[85vw] md:max-w-[50vh] lg:max-w-md mx-auto flex items-center justify-center p-4">
+            <video id="modal-video" class="w-full h-auto aspect-[9/16] object-cover rounded-3xl shadow-2xl border border-white/10" controls autoplay loop muted playsinline></video>
+        </div>
+    </div>
+
     <script>
+        // WhatsApp Popup Entrance
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const popup = document.getElementById('whatsapp-popup');
+                if(popup) {
+                    popup.classList.remove('opacity-0', 'translate-x-10');
+                    popup.classList.add('opacity-100', 'translate-x-0');
+                    
+                    // Hide it again after 8 seconds unless the user is hovering
+                    setTimeout(() => {
+                        if (!popup.parentElement.matches(':hover')) {
+                            popup.classList.add('opacity-0', 'translate-x-10');
+                            popup.classList.remove('opacity-100', 'translate-x-0');
+                        }
+                    }, 8000);
+                }
+            }, 3500); // Appear after the preloader and initial animations
+        });
+
         function toggleServiceMenu(id, btn) {
             const menu = document.getElementById(id);
             const icon = btn.querySelector('.material-symbols-outlined');
@@ -907,6 +1209,91 @@
             if (bookingSection) {
                 bookingSection.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        // Fullscreen Video Modal Functions
+        function openVideoModal(videoSrc) {
+            const modal = document.getElementById('video-modal');
+            const modalVideo = document.getElementById('modal-video');
+            
+            modalVideo.src = videoSrc;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Small delay to allow display:flex to apply before animating opacity
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+            }, 10);
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const modalVideo = document.getElementById('modal-video');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }, 500); // Wait for transition
+        }
+
+        // Initialize Swiper 3D Gallery
+        const swiperGallery = new Swiper('.swiper-3d-gallery', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: false,
+            rewind: true,
+            speed: 1000,
+            coverflowEffect: {
+                rotate: 15,
+                stretch: 0,
+                depth: 300,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+        });
+
+        // 4D Depth Mouse Tracking
+        const galleryWrap = document.querySelector('.gallery-container');
+        if (galleryWrap) {
+            galleryWrap.addEventListener('mousemove', (e) => {
+                const activeSlide = document.querySelector('.swiper-slide-active .slide-inner');
+                if (activeSlide) {
+                    const rect = activeSlide.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    
+                    activeSlide.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }
+            });
+
+            galleryWrap.addEventListener('mouseleave', () => {
+                const slides = document.querySelectorAll('.slide-inner');
+                slides.forEach(slide => {
+                    slide.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            });
         }
     </script>
 </body></html>

@@ -1,15 +1,74 @@
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DASHE Beauty - Cinematic Luxury</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DASHE Beauty | Luxury Skincare & Holistic Wellness Boutique</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="DASHE Beauty is Kuwait's premier destination for luxury skincare, holistic wellness, and premium beauty services. Explore our curated boutique of 600+ award-winning products.">
+    <meta name="keywords" content="DASHE Beauty, Skincare Kuwait, Luxury Beauty, Holistic Wellness, Beauty Services Kuwait, Anua, Abib, Korean Skincare Kuwait">
+    <meta name="author" content="DASHE Beauty">
+    <link rel="canonical" href="https://dashebeauty.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dashebeauty.com/">
+    <meta property="og:title" content="DASHE Beauty | Luxury Skincare & Holistic Wellness">
+    <meta property="og:description" content="Experience the pinnacle of luxury skincare and holistic wellness. Shop our curated boutique and book your premium beauty experience.">
+    <meta property="og:image" content="https://dashebeauty.com/wp-content/uploads/2024/05/DASHE-LOGO-WHITE.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dashebeauty.com/">
+    <meta property="twitter:title" content="DASHE Beauty | Luxury Skincare & Holistic Wellness">
+    <meta property="twitter:description" content="Experience the pinnacle of luxury skincare and holistic wellness. Shop our curated boutique and book your premium beauty experience.">
+    <meta property="twitter:image" content="https://dashebeauty.com/wp-content/uploads/2024/05/DASHE-LOGO-WHITE.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BeautySalon",
+      "name": "DASHE Beauty",
+      "image": "https://dashebeauty.com/wp-content/uploads/2024/05/DASHE-LOGO-WHITE.png",
+      "@id": "",
+      "url": "https://dashebeauty.com/",
+      "telephone": "+96566307999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kuwait City",
+        "addressLocality": "Kuwait City",
+        "addressCountry": "KW"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "10:00",
+        "closes": "22:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/dashebeauty/",
+        "https://dashebeauty.com/"
+      ]
+    }
+    </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Manrope:wght@200..800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Dancing+Script:wght@400..700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -90,7 +149,9 @@
                         "headline-lg": ["Bodoni Moda"],
                         "display-lg-mobile": ["Bodoni Moda"],
                         "body-md": ["Manrope"],
-                        "headline-md": ["Bodoni Moda"]
+                        "headline-md": ["Bodoni Moda"],
+                        "hero-script": ["Dancing Script", "cursive"],
+                        "hero-display": ["Playfair Display", "serif"]
                     },
                     "fontSize": {
                         "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
@@ -109,10 +170,128 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
+
+        /* ═══════════════════════════════════════════
+           HANDWRITING ANIMATION SYSTEM
+           ═══════════════════════════════════════════ */
+        .handwriting-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .handwriting-text {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            color: transparent;
+            background: linear-gradient(135deg, #fff 0%, #E7B6C7 50%, #D93C7A 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            opacity: 0;
+            animation: handwritingReveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.8s;
+        }
+
+        .handwriting-text::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 10%;
+            height: 80%;
+            width: 3px;
+            background: #D93C7A;
+            animation: cursorBlink 0.8s infinite, cursorFade 1s 2.8s forwards;
+        }
+
+        /* Pen-stroke underline that draws itself */
+        .handwriting-underline {
+            display: block;
+            width: 100%;
+            height: 3px;
+            margin-top: 8px;
+            background: linear-gradient(90deg, #D93C7A, #E7B6C7, transparent);
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: drawUnderline 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 2s;
+            border-radius: 2px;
+        }
+
+        /* Letter-by-letter reveal via clip-path */
+        @keyframes handwritingReveal {
+            0% {
+                opacity: 1;
+                clip-path: inset(0 100% 0 0);
+            }
+            100% {
+                opacity: 1;
+                clip-path: inset(0 0% 0 0);
+            }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes cursorFade {
+            to { opacity: 0; width: 0; }
+        }
+
+        @keyframes drawUnderline {
+            to { transform: scaleX(1); }
+        }
+
+        /* Subheading fade-in from below */
+        .hero-subheading {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: subtleRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 2.4s;
+        }
+
+        @keyframes subtleRise {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive scaling for the handwriting */
+        @media (max-width: 768px) {
+            .handwriting-text {
+                font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+            }
+            .hero-subheading {
+                font-size: clamp(0.85rem, 3.5vw, 1.1rem) !important;
+                max-width: 90% !important;
+            }
+        }
+
+        /* Scroll-Hint Peek Animation */
+        @media (max-width: 767px) {
+            .scroll-hint-peek {
+                animation: peekLeft 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s 1 forwards;
+            }
+            @keyframes peekLeft {
+                0%   { scroll-behavior: auto; }
+                40%  { scroll-behavior: auto; }
+                100% { scroll-behavior: auto; }
+            }
+        }
         .fill-icon {
             font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         
+        /* 4D Depth Effects */
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        
+        .group:hover .group-hover\:translate-z-10 {
+            transform: translateZ(30px) scale(1.1);
+        }
+
+        /* End Custom Styles */
         /* Custom Cursor */
         #cursor-dot {
             width: 8px;
@@ -215,6 +394,63 @@
             0%, 100% { opacity: 0.3; transform: scale(0.95); }
             50% { opacity: 1; transform: scale(1); }
         }
+
+        /* Swiper 3D Gallery */
+        .gallery-container {
+            perspective: 2000px;
+        }
+        .swiper-3d-gallery {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 120px;
+        }
+        .swiper-slide {
+            width: 320px;
+            height: 570px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #1b1016;
+            transform-style: preserve-3d;
+            transition: box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+        .swiper-slide-active {
+            border-color: rgba(217, 60, 122, 0.3);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(217, 60, 122, 0.1);
+        }
+        .slide-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+        .slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(27, 16, 22, 0.9) 0%, transparent 60%);
+            transform: translateZ(20px);
+        }
+        .slide-content {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            transform: translateZ(60px);
+            pointer-events: none;
+        }
+        @media (max-width: 640px) {
+            .swiper-slide {
+                width: 280px;
+                height: 500px;
+            }
+        }
     </style>
 <style>
     body {
@@ -222,8 +458,125 @@
       cursor: none; /* Hide default cursor since we have a custom one */
     }
     button, a { cursor: none; }
+    .nav-dot.active {
+      background-color: #ec4899; /* neon-rose */
+      transform: scale(1.8);
+      box-shadow: 0 0 15px rgba(236,72,153,0.8);
+    }
+    /* Mobile Safe Area & Fluid Typography */
+    :root {
+      --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      html { font-size: 14px; }
+    }
+
+    h1, h2 {
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Fluid Heading Utility */
+    .fluid-display {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+    }
+
+    /* Premium Touch Interactions */
+    @media (pointer: coarse) {
+      .hover\:scale-105:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+      }
+    }
+
+    .nav-dot.active span {
+      opacity: 1 !important;
+      transform: translateY(-50%) translateX(0) !important;
+      visibility: visible !important;
+    }
+
+    /* Horizontal Scroll Optimization */
+    .mobile-scroll-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2rem;
+      gap: 1.5rem;
+    }
+    .mobile-scroll-container::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+    .mobile-scroll-item {
+      flex: 0 0 85%; /* Default: shows most of one card */
+      scroll-snap-align: center;
+    }
+    .three-col-mobile .mobile-scroll-item {
+      flex: 0 0 44% !important; /* Shows ~2 cards + peek of 3rd */
+      scroll-snap-align: start;
+    }
+
+    /* Kick-Left animation for 3rd service card on mobile */
+    @media (max-width: 767px) {
+      #services-scroll.in-view .mobile-scroll-item:nth-child(3) {
+        animation: kickLeft 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s infinite;
+      }
+      /* Stop animation once user has interacted */
+      #services-scroll.user-touched .mobile-scroll-item:nth-child(3) {
+        animation: none !important;
+      }
+
+      @keyframes kickLeft {
+        0%   { transform: translateX(0); }
+        30%  { transform: translateX(-50px); }
+        50%  { transform: translateX(-50px); box-shadow: 0 0 25px rgba(217, 60, 122, 0.4); }
+        80%  { transform: translateX(8px); }
+        100% { transform: translateX(0); }
+      }
+    }
+    @media (min-width: 768px) {
+      .mobile-scroll-container {
+        display: grid;
+        overflow-x: visible;
+        padding-bottom: 0;
+        gap: 1.5rem;
+      }
+      .mobile-scroll-item {
+        flex: none;
+        width: auto;
+      }
+    }
   </style>
 <body class="bg-black text-white selection:bg-neon-rose selection:text-white">
+    <!-- Vertical 3D Navigator -->
+    <nav class="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-6 backdrop-blur-2xl bg-white/[0.03] border border-white/10 py-6 px-3 md:px-4 rounded-full shadow-[0_0_30px_rgba(0,0,0,0.8)] transform-style-3d scale-90 md:scale-100">
+        <a href="#hero" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Home</span>
+        </a>
+        <a href="#boutique-services" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Services</span>
+        </a>
+        <a href="#our-work-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Gallery</span>
+        </a>
+        <a href="#boutique" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Shop</span>
+        </a>
+        <a href="#booking" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Book</span>
+        </a>
+        <a href="#sanctuary-gallery" class="nav-dot group relative w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-neon-rose transition-all duration-500 hover:scale-[1.8] shadow-[0_0_10px_transparent] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+            <span class="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 font-label-caps text-[10px] tracking-widest text-white uppercase whitespace-nowrap translate-x-4 group-hover:translate-x-0 bg-black/50 px-3 py-1.5 rounded-md backdrop-blur-md border border-white/10 pointer-events-none">Sanctuary</span>
+        </a>
+    </nav>
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader-content">
@@ -253,38 +606,37 @@
             <div class="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/70 via-black/20 to-transparent"></div>
         </div>
 
-        <div class="relative z-10 flex flex-col items-start gap-8 md:gap-10 text-left px-8 md:px-24 max-w-5xl">
+        <div class="relative z-10 flex flex-col items-start gap-6 md:gap-10 text-left px-8 md:px-24 max-w-5xl">
             <div class="flex flex-col items-start gap-4 md:gap-6">
-                <div class="flex items-center gap-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s;">
-                    <div class="w-8 h-[1px] bg-neon-rose"></div>
+                <!-- Accent Line -->
+                <div class="flex items-center gap-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="w-10 h-[1px] bg-neon-rose"></div>
                     <p class="font-label-caps text-xs text-luxury-pink tracking-[0.5em] uppercase">
-                        Elite Beauty Collective
+                        DASHE Beauty
                     </p>
                 </div>
                 
-                <h1 class="font-display-lg text-2xl md:text-6xl text-white leading-[1.1] opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
-                    Elite Beauty <br/>
-                    <span class="text-neon-rose italic">Premium Care</span>
-                </h1>
+                <!-- Hero Heading with Handwriting Animation -->
+                <div class="handwriting-container">
+                    <h1 class="handwriting-text font-hero-script text-5xl md:text-8xl lg:text-[7rem] leading-[1.15] tracking-wide">
+                        The DASHE Experience
+                    </h1>
+                    <span class="handwriting-underline"></span>
+                </div>
                 
-                <p class="font-body-md text-[10px] md:text-base text-gray-300 max-w-[200px] md:max-w-sm opacity-0 animate-fade-in-up" style="animation-delay: 1s;">
-                    Discover DASHE Beauty, where cinematic artistry meets unmatched luxury in the heart of Kuwait.
+                <!-- Subheading -->
+                <p class="hero-subheading font-hero-display text-base md:text-xl lg:text-2xl text-gray-300/90 max-w-lg leading-relaxed italic" style="font-weight: 400;">
+                    Step into a world of cinematic beauty, elevated care, and timeless glamour.
                 </p>
             </div>
         </div>
 
-        <!-- Scroll Indicator (Left Aligned) -->
-        <div class="absolute bottom-12 left-12 md:left-24 flex flex-col items-center gap-6 opacity-30 animate-bounce-slow">
-            <div class="w-[1px] h-20 bg-gradient-to-b from-white via-white/50 to-transparent"></div>
-            <span class="font-label-caps text-[8px] tracking-[0.5em] uppercase text-white rotate-90 origin-left translate-x-2 mt-4">Scroll</span>
-        </div>
+
     </section>
 
-    <!-- Content Sections -->
     <main id="main-content" class="relative z-20 bg-background">
         
-        <!-- Service Boutique Section -->
-        <section id="boutique-services" class="relative w-full py-40 px-8 md:px-24 overflow-hidden">
+        <section id="boutique-services" class="relative w-full py-24 px-8 md:px-24 overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-black to-transparent pointer-events-none"></div>
             <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-24">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
@@ -292,134 +644,129 @@
                     <h2 class="font-display-lg text-6xl md:text-8xl text-white text-center">Service <span class="text-luxury-pink">Boutique</span></h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 reveal-on-scroll">
-                    <!-- Hair -->
-                    <div class="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
+                <div id="services-scroll" class="mobile-scroll-container three-col-mobile md:grid-cols-5 reveal-on-scroll">
+                    <div class="mobile-scroll-item group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
                         <div class="flex items-center justify-between">
                             <span class="material-symbols-outlined text-neon-rose text-4xl">content_cut</span>
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">01</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Hair</h3>
-                        <button onclick="toggleServiceMenu('hair-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('hair-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="hair-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Hair Cutting')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Cutting')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">content_cut</span> Hair Cutting
                             </button>
-                            <button onclick="selectService('Hair Styling')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Styling')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">styler</span> Hair Styling
                             </button>
-                            <button onclick="selectService('Hair Coloring')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Coloring')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">palette</span> Hair Coloring
                             </button>
-                            <button onclick="selectService('Hair Treatments')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hair Treatments')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">vaccines</span> Hair Treatments
                             </button>
-                            <button onclick="selectService('Curly Hair Care')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Curly Hair Care')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">waves</span> Curly Hair Care
                             </button>
                         </div>
                     </div>
 
-                    <!-- Nails -->
-                    <div class="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
+                    <div class="mobile-scroll-item group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
                         <div class="flex items-center justify-between">
                             <span class="material-symbols-outlined text-neon-rose text-4xl">spa</span>
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">02</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Nails</h3>
-                        <button onclick="toggleServiceMenu('nails-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('nails-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="nails-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Basic Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Basic Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">brush</span> Basic Nails
                             </button>
-                            <button onclick="selectService('Advanced Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Advanced Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">format_paint</span> Advanced Nails
                             </button>
-                            <button onclick="selectService('Premium Nail Services')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Premium Nail Services')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">diamond</span> Premium Nails
                             </button>
                         </div>
                     </div>
 
-                    <!-- Brows & Lashes -->
-                    <div class="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
+                    <div class="mobile-scroll-item group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
                         <div class="flex items-center justify-between">
                             <span class="material-symbols-outlined text-neon-rose text-4xl">visibility</span>
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">03</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Eyes</h3>
-                        <button onclick="toggleServiceMenu('eyes-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('eyes-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="eyes-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Brows and Lashes')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Brows and Lashes')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">visibility</span> Brows & Lashes
                             </button>
                         </div>
                     </div>
 
-                    <!-- Makeup -->
-                    <div class="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
+                    <div class="mobile-scroll-item group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
                         <div class="flex items-center justify-between">
                             <span class="material-symbols-outlined text-neon-rose text-4xl">brush</span>
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">04</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">Makeup</h3>
-                        <button onclick="toggleServiceMenu('makeup-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('makeup-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="makeup-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Bridal Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Bridal Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">favorite</span> Bridal Makeup
                             </button>
-                            <button onclick="selectService('Full Glam Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Full Glam Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">auto_fix_high</span> Full Glam
                             </button>
-                            <button onclick="selectService('Arabic Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Arabic Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">temple_hindu</span> Arabic Makeup
                             </button>
-                            <button onclick="selectService('Event Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Event Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">celebration</span> Event Makeup
                             </button>
-                            <button onclick="selectService('Glass Skin Makeup')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Glass Skin Makeup')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">flare</span> Glass Skin
                             </button>
                         </div>
                     </div>
 
-                    <!-- SPA -->
-                    <div class="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
+                    <div class="mobile-scroll-item group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-neon-rose/30 backdrop-blur-xl transition-all duration-700 flex flex-col gap-6 h-fit">
                         <div class="flex items-center justify-between">
                             <span class="material-symbols-outlined text-neon-rose text-4xl">self_improvement</span>
                             <span class="font-label-caps text-[10px] text-gray-600 tracking-widest uppercase">05</span>
                         </div>
                         <h3 class="font-display-lg text-3xl text-white">SPA</h3>
-                        <button onclick="toggleServiceMenu('spa-menu', this)" class="flex items-center gap-3 text-[10px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
+                        <button onclick="toggleServiceMenu('spa-menu', this)" class="flex items-center gap-3 text-[12px] font-label-caps tracking-[0.3em] text-neon-rose uppercase group/btn animate-float-slow">
                             <span>Explore Services</span>
                             <span class="material-symbols-outlined text-sm transition-transform">expand_more</span>
                         </button>
                         <div id="spa-menu" class="hidden flex flex-col gap-3 pt-4 border-t border-white/5 overflow-hidden animate-fade-in">
-                            <button onclick="selectService('Moroccan Bath')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Moroccan Bath')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">bathtub</span> Moroccan Bath
                             </button>
-                            <button onclick="selectService('Relaxation Massage')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Relaxation Massage')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">spa</span> Relaxation Massage
                             </button>
-                            <button onclick="selectService('Hydrafacial')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hydrafacial')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">water_drop</span> Hydrafacial
                             </button>
-                            <button onclick="selectService('Hammam Spa')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
+                            <button onclick="selectService('Hammam Spa')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2 border-b border-white/5">
                                 <span class="material-symbols-outlined text-sm">hot_tub</span> Hammam Spa
                             </button>
-                            <button onclick="selectService('Luxury Spa Experience')" class="flex items-center gap-3 text-left text-[11px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
+                            <button onclick="selectService('Luxury Spa Experience')" class="flex items-center gap-3 text-left text-[14px] text-gray-500 hover:text-white hover:translate-x-2 transition-all py-2">
                                 <span class="material-symbols-outlined text-sm">workspace_premium</span> Luxury Experience
                             </button>
                         </div>
@@ -428,130 +775,123 @@
             </div>
         </section>
 
-        <!-- Artisans Marquee Section -->
-        <section id="artisans" class="relative w-full py-40 overflow-hidden bg-black/60">
-            <div class="max-w-7xl mx-auto px-12 md:px-24 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-12 reveal-on-scroll">
-                <div class="flex flex-col gap-6">
-                    <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">The Collective</p>
-                    <h2 class="font-display-lg text-6xl md:text-8xl text-white">Beauty Experts</h2>
-                </div>
-                <p class="text-gray-500 font-body-md max-w-sm mb-4">
-                    Our expert team delivers top-tier hair and makeup services with unmatched skill and creativity.
-                </p>
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
+        <section id="our-work-gallery" class="relative w-full py-24 overflow-hidden bg-background">
+            <div class="absolute inset-0 z-0">
+                <img src="gallery_bg.jpeg" alt="Gallery Background" class="w-full h-full object-cover opacity-20 mix-blend-luminosity" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
             </div>
 
-            <div class="relative w-full overflow-hidden">
-                <div class="flex animate-marquee whitespace-nowrap">
-                    <!-- Experts Row 1 -->
-                    <div class="flex gap-4 px-2">
-                        <!-- Expert 1 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+            <div class="relative z-10 max-w-7xl mx-auto px-12 md:px-24 mb-16 reveal-on-scroll">
+                <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase mb-4">Aesthetic Moments</p>
+                <h2 class="font-display-lg text-6xl md:text-8xl text-white">Our Work</h2>
+            </div>
+
+            <div class="gallery-container relative z-10 reveal-on-scroll">
+                <div class="swiper swiper-3d-gallery">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_1.mp4')">
+                                <video src="work_vid_1.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Signature Look</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Artistry</p>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Expert 2 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_2.mp4')">
+                                <video src="work_vid_2.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Bridal Glow</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Details</p>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Expert 3 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 4 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 5 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 6 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 7 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <!-- Expert 8 -->
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                    </div>
-                    <!-- Duplicate Row for Seamless Loop -->
-                    <div class="flex gap-4 px-2">
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
-                        </div>
-                        <div class="relative w-[240px] h-[480px] group overflow-hidden rounded-[40px] flex-shrink-0">
-                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-center transition-all duration-700">
+                        <div class="swiper-slide">
+                            <div class="slide-inner cursor-pointer" onclick="openVideoModal('work_vid_3.mp4')">
+                                <video src="work_vid_3.mp4" autoplay loop muted playsinline class="slide-img"></video>
+                                <div class="slide-overlay"></div>
+                                <div class="slide-content">
+                                    <h3 class="font-display-lg text-3xl text-white mb-2">Editorial Glam</h3>
+                                    <p class="text-neon-rose font-label-caps text-[10px] tracking-widest uppercase">The Vision</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="swiper-pagination !bottom-0"></div>
                 </div>
             </div>
         </section>
 
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
 
-        <!-- Best Sellers Section -->
-        <section id="boutique" class="relative w-full py-40 px-12 md:px-24 bg-black/40">
+        <section id="boutique" class="relative w-full py-24 px-6 md:px-24 bg-black/40">
             <div class="max-w-7xl mx-auto flex flex-col gap-24">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">The Boutique</p>
                     <h2 class="font-display-lg text-6xl md:text-8xl text-white">Best Sellers</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <!-- Product 1 -->
-                    <div class="group relative reveal-on-scroll">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                <div class="mobile-scroll-container three-col-mobile md:grid-cols-3 reveal-on-scroll">
+                    <div class="mobile-scroll-item group relative" style="perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/08/06b_2048x_9e743a54-5ad1-4421-a567-5721c42bbd44.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" loading="lazy" alt="Abib Airy Sunstick Smoothing Bar">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">Got2b Glued 2in1 Gel</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">7.000 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Abib Airy Sunstick Smoothing Bar</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">9.500 KWD</p>
                     </div>
-                    <!-- Product 2 -->
-                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.1s;">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                    <div class="mobile-scroll-item group relative" style="transition-delay: 0.1s; perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/10/anua-us-ampoule-serum-azelaic-acid-10-hyaluron-redness-soothing-serum-1161173135.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" loading="lazy" alt="Anua Azelaic Acid 10+ Hyaluron Redness Soothing Serum">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">SO NATURAL Setting Fixer</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">6.000 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Anua Azelaic Acid 10+ Hyaluron Redness Soothing</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">8.500 KWD</p>
                     </div>
                     <!-- Product 3 -->
-                    <div class="group relative reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AK6AXuA-w5uPILbPIUHzK6Lnj3ljE3ueeBfk8QDGL2aQXj4_z56C7XwY03hEY_uUp9e5cngTAw1oGrG2pG1YQ9T9Idri-o61oPtTqA2aLUmwkg8RVxC7lGnDSHDUJUKU3DotSvRzUKn5ItAD1mhCPIw-tkf6I8rYwgzAUs-eDaysultKNXXsjhxhuk7vmWA5qpLN5WRarySubL4E4pn0hfYgqZJtxQI8-s9n3FIuyYFQlkAjKeeHycKYlHJMX2svvnL5udrUvhl8E2Pt--Ist" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                    <div class="mobile-scroll-item group relative" style="transition-delay: 0.2s; perspective: 1000px;">
+                        <div class="aspect-[3/4] rounded-[40px] overflow-hidden bg-white/5 border border-white/5 mb-8 flex items-center justify-center transition-all duration-700 transform-style-3d group-hover:translate-y-[-10px] group-hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)]">
+                            <img src="https://dashebeauty.com/wp-content/uploads/2025/10/anua-global-ampoule-serum-pdrn-hyaluronic-acid-capsule-100-serum-1161173231.webp" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 drop-shadow-2xl group-hover:translate-z-10" loading="lazy" alt="Anua PDRN Hyaluronic Acid Capsule 100+">
                         </div>
-                        <h3 class="font-display-lg text-xl text-white mb-2">Color Wow Volumizer</h3>
-                        <p class="text-neon-rose font-label-caps text-xs tracking-widest">6.500 KWD</p>
+                        <h3 class="font-display-lg text-xl text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">Anua PDRN Hyaluronic Acid Capsule 100+</h3>
+                        <p class="text-neon-rose font-label-caps text-xs tracking-widest transition-transform duration-500 group-hover:translate-x-2">9.000 KWD</p>
                     </div>
-                    <!-- View All -->
-                    <div class="flex items-center justify-center border border-white/5 rounded-[40px] hover:border-neon-rose transition-colors cursor-pointer reveal-on-scroll" style="transition-delay: 0.3s;">
-                        <span class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-gray-500 hover:text-white">Show All</span>
-                    </div>
+                </div>
+
+                <!-- View All / Shop Full Store Button -->
+                <div class="flex justify-center mt-16 reveal-on-scroll">
+                    <a href="shop.html" class="group flex items-center gap-6 bg-white/5 border border-white/10 hover:border-neon-rose px-12 py-6 rounded-full transition-all duration-700 hover:shadow-[0_10px_30px_rgba(236,72,153,0.2)]">
+                        <span class="material-symbols-outlined text-2xl text-neon-rose group-hover:scale-125 transition-transform">storefront</span>
+                        <span class="font-label-caps text-xs tracking-[0.4em] uppercase text-white">Explore Boutique Collection (600+ Items)</span>
+                        <span class="material-symbols-outlined text-xl text-white group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                    </a>
                 </div>
             </div>
         </section>
 
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
         <!-- Appointment Booking Section -->
-        <section id="booking" class="relative w-full py-40 px-12 md:px-24 bg-background">
+        <section id="booking" class="relative w-full py-24 px-12 md:px-24 bg-background">
             <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-32 items-start">
                 <div class="flex flex-col gap-10 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase">Bespoke Scheduling</p>
@@ -638,275 +978,421 @@
             </div>
         </section>
 
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
+
         <!-- Sanctuary Gallery Section -->
-        <section class="relative w-full py-40 px-12 md:px-24 bg-background overflow-hidden">
+        <section id="sanctuary-gallery" class="relative w-full py-24 px-12 md:px-24 bg-background overflow-hidden">
             <div class="max-w-7xl mx-auto flex flex-col gap-20">
                 <div class="flex flex-col gap-6 reveal-on-scroll">
                     <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase text-center">Visual Poetry</p>
                     <h2 class="font-display-lg text-6xl md:text-8xl text-white text-center">The Sanctuary</h2>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px]">
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl" style="transition-delay: 0.1s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+                <!-- 4D Cinematic Expanding Accordion -->
+                <div class="flex flex-col md:flex-row w-full h-[600px] gap-4 overflow-hidden group/gallery reveal-on-scroll" style="perspective: 2000px;">
+                    
+                    <!-- Panel 1 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="luxury_hair_salon_gallery_1778889636249.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Atmosphere</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">The VIP Lounge</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl mt-12" style="transition-delay: 0.2s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 2 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="professional_makeup_gallery_1778889672717.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Detailing</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">Precision Artistry</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl" style="transition-delay: 0.3s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 3 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="elegant_nail_art_gallery_1778889685826.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Relaxation</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">Private Spa Suites</h3>
+                        </div>
                     </div>
-                    <div class="reveal-on-scroll h-full overflow-hidden rounded-3xl mt-12" style="transition-delay: 0.4s;">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AL6AXuAtC5U7V7R9vY7t7T6u9L8vY5w2z8u7X6y5v4w3z2u1x0y9z8w7v6u5t4s3r2q1p0o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0">
+
+                    <!-- Panel 4 -->
+                    <div class="relative flex-1 hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[40px] overflow-hidden grayscale-[50%] hover:grayscale-0 transform-style-3d hover:translate-z-10 group/item cursor-pointer border border-white/5 hover:border-neon-rose/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+                        <img src="modern_spa_gallery_1778889714593.png" class="w-full h-full object-cover transition-transform duration-1000 group-hover/item:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-100 transition-opacity duration-1000 z-10"></div>
+                        <div class="absolute bottom-10 left-10 z-20 opacity-0 group-hover/item:opacity-100 transition-all duration-1000 translate-y-10 group-hover/item:translate-y-0 text-left">
+                            <p class="font-label-caps text-[10px] text-neon-rose tracking-[0.4em] uppercase mb-3">Experience</p>
+                            <h3 class="font-display-lg text-2xl md:text-4xl text-white whitespace-nowrap">The Dashe Glow</h3>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="w-full py-40 px-12 md:px-24 border-t border-white/5 bg-black">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
-                <div class="flex flex-col gap-10">
-                    <img src="assets/main_logo.png" alt="DASHE" class="w-48 opacity-50 hover:opacity-100 transition-opacity">
-                    <p class="text-gray-600 max-w-xs font-body-md">
-                        Elite beauty meets premium care in the heart of Kuwait City. Experience the cinematic standard.
-                    </p>
-                </div>
-                
-                <div class="flex flex-col gap-8">
-                    <h4 class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-white">Contact</h4>
-                    <div class="flex flex-col gap-4 text-gray-500 font-body-md text-sm">
-                        <p>+965 66307999</p>
-                        <p>contact@ddbeautyvision.com</p>
-                        <p class="leading-relaxed">Yarmouk, Block 4, Street 3, Al Saqran Mall</p>
-                    </div>
-                </div>
+        <!-- 4D Depth Divider -->
+        <div class="relative w-full flex justify-center z-30">
+            <div class="h-px w-3/4 max-w-5xl relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neon-rose/40 to-transparent blur-[6px] transform-style-3d translate-z-10"></div>
+            </div>
+        </div>
 
-                <div class="flex flex-col gap-8">
-                    <h4 class="font-label-caps text-[10px] tracking-[0.5em] uppercase text-white">Hours</h4>
-                    <div class="flex flex-col gap-4 text-gray-500 font-body-md text-sm">
-                        <p>Sunday - Saturday</p>
-                        <p>9:00AM - 9:00PM</p>
+        <!-- Redesigned Footer -->
+        <footer class="relative bg-background pt-24 pb-20 px-6 md:px-12 overflow-hidden border-t border-white/5">
+            <!-- Footer Heading -->
+            <div class="flex flex-col items-center text-center gap-6 mb-24 px-6">
+                <p class="font-label-caps text-xs text-neon-rose tracking-[0.5em] uppercase reveal-on-scroll">The Artisans</p>
+                <h2 class="font-display-lg text-6xl md:text-9xl text-white reveal-on-scroll">Our Beauty Experts</h2>
+                <div class="w-24 h-px bg-neon-rose/30 mt-4"></div>
+            </div>
+            <!-- Vertical Tiles / Experts Marquee -->
+            <div class="relative w-full overflow-hidden mb-40">
+                <div class="flex animate-marquee whitespace-nowrap">
+                    <!-- Experts Row 1 -->
+                    <div class="flex gap-10 px-5 items-start">
+                        <!-- Expert 1 -->
+                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 2 - Staggered -->
+                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 3 -->
+                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 4 - Staggered -->
+                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 5 -->
+                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 6 - Staggered -->
+                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 7 -->
+                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <!-- Expert 8 - Staggered -->
+                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
                     </div>
-                    <nav class="flex gap-6 mt-4">
-                        <a href="https://instagram.com/dashebeautykw" target="_blank" class="text-neon-rose hover:text-white transition-colors uppercase text-[10px] font-label-caps tracking-widest">@dashebeautykw</a>
-                    </nav>
+                    <!-- Duplicate Row for Seamless Loop -->
+                    <div class="flex gap-10 px-5 items-start">
+                        <div class="relative w-[320px] h-[600px] group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 01.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[520px] mt-24 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 02.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[580px] mt-12 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 03.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[620px] mt-0 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 04.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[500px] mt-32 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 05.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[580px] mt-16 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 06.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[540px] mt-28 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 07.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                        <div class="relative w-[320px] h-[600px] mt-8 group overflow-hidden rounded-[30px] flex-shrink-0 border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
+                            <img src="assets/experts/image 08.jpg" class="w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="max-w-7xl mx-auto mt-32 pt-12 border-t border-white/5 text-center">
-                <p class="text-gray-700 text-[10px] tracking-[0.4em] uppercase">© 2024 DASHE Beauty | Luxury Redefined</p>
+
+            <!-- Quote / Text -->
+            <div class="max-w-2xl mx-auto md:mx-0 md:ml-12 mb-32 reveal-on-scroll">
+                <p class="text-white/60 font-body-md text-xl md:text-2xl leading-relaxed">
+                    Good beauty whispers. Great beauty makes people stop scrolling. We create iconic looks and digital-era aesthetics that capture attention and refuse to be forgotten. Let's bring your vision to life.
+                </p>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 pt-12 border-t border-white/5">
+                <!-- Social Icons -->
+                <div class="flex gap-8 items-center order-2 md:order-1">
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://instagram.com/dashebeautykw" target="_blank" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 order-1 md:order-2">
+                    <img src="assets/main_logo.png" alt="DASHE" class="h-16 w-auto opacity-90">
+                </div>
+
+                <!-- Get in Touch -->
+                <div class="order-3">
+                    <a href="#booking" class="bg-white text-black px-10 py-4 rounded-xl font-label-caps text-xs tracking-[0.3em] hover:bg-neon-rose hover:text-white transition-all uppercase">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center mt-16">
+                <p class="text-white/20 text-[10px] tracking-[0.4em] uppercase">© 2025 DASHE BEAUTY | ALL RIGHTS RESERVED</p>
             </div>
         </footer>
     </main>
 
+    <!-- Mobile Floating Booking Button -->
+    <a href="#reservation" class="md:hidden fixed bottom-[calc(2rem+var(--safe-area-inset-bottom))] right-8 z-[60] bg-neon-rose text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(236,72,153,0.5)] active:scale-95 transition-transform duration-300">
+        <span class="material-symbols-outlined text-3xl">calendar_month</span>
+    </a>
+
     <script>
-        // Magnetic Button Logic
-        const magneticBtns = document.querySelectorAll('.magnetic-btn');
-        magneticBtns.forEach(btn => {
+        /**
+         * DASHE Beauty - Global Initialization
+         * Handles Preloader, ScrollSpy, Swiper, and Interactive Effects
+         */
+
+        // 1. Preloader & Page Initialization
+        const initWebsite = () => {
+            const preloader = document.getElementById('preloader');
+            const progressBar = document.getElementById('loader-progress');
+            
+            if (progressBar) progressBar.style.width = '100%';
+            
+            if (preloader && !preloader.classList.contains('fade-out')) {
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.style.overflow = 'visible';
+                    
+                    // Trigger initial reveal animations
+                    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < window.innerHeight) {
+                            el.classList.add('active');
+                        }
+                    });
+                }, 800);
+            }
+        };
+
+        // Safety Clearing: Ensure preloader disappears even if resources hang
+        const safetyTimeout = setTimeout(initWebsite, 4000);
+
+        window.addEventListener('load', () => {
+            clearTimeout(safetyTimeout);
+            initWebsite();
+
+            // WhatsApp Popup Entrance (Cinematic delay)
+            setTimeout(() => {
+                const popup = document.getElementById('whatsapp-popup');
+                if(popup) {
+                    popup.classList.remove('opacity-0', 'translate-x-10');
+                    popup.classList.add('opacity-100', 'translate-x-0');
+                    
+                    setTimeout(() => {
+                        if (!popup.parentElement.matches(':hover')) {
+                            popup.classList.add('opacity-0', 'translate-x-10');
+                            popup.classList.remove('opacity-100', 'translate-x-0');
+                        }
+                    }, 8000);
+                }
+            }, 3000);
+
+            // Kick-Left hint: loop while section is visible, stop on user swipe
+            if (window.innerWidth < 768) {
+                const servicesScroll = document.getElementById('services-scroll');
+                if (servicesScroll) {
+                    const peekObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                if (!servicesScroll.classList.contains('user-touched')) {
+                                    servicesScroll.classList.add('in-view');
+                                }
+                            } else {
+                                servicesScroll.classList.remove('in-view');
+                            }
+                        });
+                    }, { threshold: 0.2 });
+                    peekObserver.observe(servicesScroll);
+
+                    // Stop animation when user touches or swipes the row
+                    servicesScroll.addEventListener('touchstart', () => {
+                        servicesScroll.classList.add('user-touched');
+                        servicesScroll.classList.remove('in-view');
+                    }, { once: true });
+                    servicesScroll.addEventListener('scroll', () => {
+                        servicesScroll.classList.add('user-touched');
+                        servicesScroll.classList.remove('in-view');
+                    }, { once: true });
+                }
+            }
+        });
+
+        // 2. Navigation & ScrollSpy
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = Array.from(navDots).map(dot => document.querySelector(dot.getAttribute('href')));
+
+        const scrollSpyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navDots.forEach(dot => {
+                        dot.classList.toggle('active', dot.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: "-20% 0px -20% 0px"
+        });
+
+        sections.forEach(section => {
+            if (section) scrollSpyObserver.observe(section);
+        });
+
+        // 3. Magnetic & Interactive Elements
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
             });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = `translate(0, 0)`;
-            });
+            btn.addEventListener('mouseleave', () => btn.style.transform = `translate(0, 0)`);
         });
 
-        // Booking Form Logic
-        const bookingForm = document.getElementById('booking-form');
-        if (bookingForm) {
-            bookingForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const name = document.getElementById('client-name').value;
-                const service = document.getElementById('client-service').value;
-                const date = document.getElementById('client-date').value;
-                const time = document.getElementById('client-time').value;
-                
-                const message = encodeURIComponent(
-                    `✨ *DASHE LUXURY BOOKING* ✨\n` +
-                    `━━━━━━━━━━━━━━━━━━━━\n\n` +
-                    `👑 *CLIENT:* ${name}\n` +
-                    `🎨 *ARTISTRY:* ${service}\n` +
-                    `📅 *DATE:* ${date}\n` +
-                    `⏰ *TIME:* ${time}\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `_Sent via DASHE Cinematic Boutique_`
-                );
-                
-                const whatsappUrl = `https://wa.me/96566307999?text=${message}`;
-                window.open(whatsappUrl, '_blank');
-            });
-        }
-
-        // Expert Chip Logic
-        document.querySelectorAll('.expert-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                document.querySelectorAll('.expert-chip').forEach(c => c.classList.remove('border-neon-rose', 'bg-neon-rose/20'));
-                chip.classList.add('border-neon-rose', 'bg-neon-rose/20');
-            });
-        });
-
-        // Custom Cursor Logic
+        // 4. Custom Cursor System
         const dot = document.getElementById('cursor-dot');
         const ring = document.getElementById('cursor-ring');
         const glow = document.getElementById('mouse-glow');
-        
-        let mouseX = 0;
-        let mouseY = 0;
-        let ringX = 0;
-        let ringY = 0;
+        let mX = 0, mY = 0, rX = 0, rY = 0;
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            dot.style.left = `${mouseX - 4}px`;
-            dot.style.top = `${mouseY - 4}px`;
-            
-            glow.style.setProperty('--x', `${mouseX}px`);
-            glow.style.setProperty('--y', `${mouseY}px`);
+            mX = e.clientX; mY = e.clientY;
+            dot.style.left = `${mX - 4}px`;
+            dot.style.top = `${mY - 4}px`;
+            glow.style.setProperty('--x', `${mX}px`);
+            glow.style.setProperty('--y', `${mY}px`);
         });
 
-        function animateRing() {
-            ringX += (mouseX - ringX - 20) * 0.15;
-            ringY += (mouseY - ringY - 20) * 0.15;
-            
-            ring.style.left = `${ringX}px`;
-            ring.style.top = `${ringY}px`;
-            
+        const animateRing = () => {
+            rX += (mX - rX - 20) * 0.15;
+            rY += (mY - rY - 20) * 0.15;
+            ring.style.left = `${rX}px`;
+            ring.style.top = `${rY}px`;
             requestAnimationFrame(animateRing);
-        }
+        };
         animateRing();
 
-        // Cursor Hover Effects
         document.querySelectorAll('button, a, .service-card, .group').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
-        // Parallax and Reveal Logic
+        // 5. Scroll Effects (Parallax & Reveal)
         window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset;
-            
-            // Subtle Hero Parallax
+            const st = window.pageYOffset;
             const heroBg = document.getElementById('hero-bg');
             if (heroBg) {
-                heroBg.style.transform = `translateY(${scrollTop * 0.2}px)`;
-                heroBg.style.opacity = 1 - (scrollTop / 1000);
+                heroBg.style.transform = `translateY(${st * 0.2}px)`;
+                heroBg.style.opacity = 1 - (st / 1000);
             }
-
-            // Reveal animations
             document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight * 0.9;
-                if (isVisible) {
-                    el.classList.add('active');
-                }
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('active');
             });
         });
 
-        // Trigger reveal on load
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.classList.add('fade-out');
-                
-                document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight) {
-                        el.classList.add('active');
-                    }
-                });
-            }, 1500); // Elegant delay to appreciate the logo
-        });
-    </script>
-
-    <style>
-        html { scroll-behavior: smooth; }
-        
-        body::-webkit-scrollbar { display: none; }
-        body {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-            animation: fade-in-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(15px); opacity: 0.6; }
-        }
-        .animate-bounce-slow {
-            animation: bounce-slow 4s ease-in-out infinite;
-        }
-
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .service-card {
-            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .service-card:hover {
-            transform: translateY(-20px);
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 40px 100px rgba(217, 60, 122, 0.15);
-        }
-    </style>
-    <script>
+        // 6. Utility Functions (Modals & Menus)
         function toggleServiceMenu(id, btn) {
             const menu = document.getElementById(id);
             const icon = btn.querySelector('.material-symbols-outlined');
-            
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-                btn.classList.add('text-white');
-            } else {
-                menu.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-                btn.classList.remove('text-white');
-            }
+            menu.classList.toggle('hidden');
+            icon.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            btn.classList.toggle('text-white');
         }
 
-        function selectService(serviceName) {
-            // Directly populate the main form
-            const serviceSelect = document.getElementById('client-service');
-            if (serviceSelect) {
-                serviceSelect.value = serviceName;
-            }
-            // Scroll to the booking section
-            const bookingSection = document.getElementById('booking');
-            if (bookingSection) {
-                bookingSection.scrollIntoView({ behavior: 'smooth' });
-            }
+        function selectService(name) {
+            const input = document.getElementById('client-service');
+            if (input) input.value = name;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openVideoModal(src) {
+            const v = document.getElementById('modal-video');
+            v.src = src;
+            const m = document.getElementById('video-modal');
+            m.classList.replace('hidden', 'flex');
+            setTimeout(() => m.classList.replace('opacity-0', 'opacity-100'), 10);
+        }
+
+        function closeVideoModal() {
+            const m = document.getElementById('video-modal');
+            m.classList.replace('opacity-100', 'opacity-0');
+            setTimeout(() => {
+                m.classList.replace('flex', 'hidden');
+                document.getElementById('modal-video').pause();
+            }, 500);
+        }
+
+        // 7. Initialize External Libraries
+        const swiper = new Swiper('.swiper-3d-gallery', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            rewind: true,
+            speed: 1000,
+            coverflowEffect: { rotate: 15, stretch: 0, depth: 300, modifier: 1, slideShadows: true },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 2000, disableOnInteraction: false },
+        });
+
+        // 8. 4D Depth Tracking
+        const gallery = document.querySelector('.gallery-container');
+        if (gallery) {
+            gallery.addEventListener('mousemove', (e) => {
+                const inner = document.querySelector('.swiper-slide-active .slide-inner');
+                if (inner) {
+                    const r = inner.getBoundingClientRect();
+                    const rx = (e.clientY - r.top - r.height / 2) / 15;
+                    const ry = (r.width / 2 - (e.clientX - r.left)) / 15;
+                    inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+                }
+            });
+            gallery.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.slide-inner').forEach(s => s.style.transform = 'rotateX(0deg) rotateY(0deg)');
+            });
+        }
+        
+        // 9. Booking Form
+        const bForm = document.getElementById('booking-form');
+        if (bForm) {
+            bForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const msg = encodeURIComponent(`✨ *DASHE LUXURY BOOKING* ✨\n━━━━━━━━━━━━━━━━━━━━\n\n👑 *CLIENT:* ${document.getElementById('client-name').value}\n🎨 *ARTISTRY:* ${document.getElementById('client-service').value}\n📅 *DATE:* ${document.getElementById('client-date').value}\n⏰ *TIME:* ${document.getElementById('client-time').value}\n\n━━━━━━━━━━━━━━━━━━━━\n_Sent via DASHE Cinematic Boutique_`);
+                window.open(`https://wa.me/96566307999?text=${msg}`, '_blank');
+            });
         }
     </script>
 </body></html>
