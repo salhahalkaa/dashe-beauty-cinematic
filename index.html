@@ -1532,16 +1532,19 @@
         </footer>
     </main>
 
-        <!-- WhatsApp Floating Help Button -->
+            <!-- WhatsApp Floating Help Button -->
     <a href="https://wa.me/96566307999?text=Hello!%0AI%20need%20some%20help%20here." 
        target="_blank" 
-       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex items-center gap-3 bg-[#25D366] text-white px-5 py-3.5 md:px-6 md:py-4 rounded-full shadow-[0_10px_35px_rgba(37,211,102,0.4)] hover:shadow-[0_15px_40px_rgba(37,211,102,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 group font-label-caps text-xs md:text-sm tracking-wider uppercase border border-[#34e073]/40 backdrop-blur-md">
-        <!-- WhatsApp Icon with subtle pulse animation -->
-        <span class="relative flex h-5 w-5 md:h-6 md:w-6 items-center justify-center">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
-            <i class="fab fa-whatsapp text-xl md:text-2xl relative z-10"></i>
+       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-[0_10px_35px_rgba(37,211,102,0.5),inset_0_4px_12px_rgba(255,255,255,0.6),inset_0_-4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_40px_rgba(37,211,102,0.7),inset_0_4px_12px_rgba(255,255,255,0.7),inset_0_-4px_12px_rgba(0,0,0,0.2)] hover:scale-110 active:scale-95 transition-all duration-300 group border border-[#5cf08f]">
+        
+        <!-- Tooltip Popup -->
+        <span class="absolute right-[calc(100%+16px)] top-1/2 -translate-y-1/2 bg-white text-black px-4 py-2 rounded-xl text-xs md:text-sm font-label-caps font-bold tracking-widest uppercase shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 whitespace-nowrap before:content-[''] before:absolute before:top-1/2 before:-right-2 before:-translate-y-1/2 before:border-[6px] before:border-transparent before:border-l-white">Need Help!</span>
+        
+        <!-- WhatsApp Icon -->
+        <span class="relative flex items-center justify-center w-full h-full">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-40"></span>
+            <i class="fab fa-whatsapp text-3xl md:text-4xl drop-shadow-md relative z-10"></i>
         </span>
-        <span class="font-bold tracking-widest">Need Help!</span>
     </a>
 
     <script>
